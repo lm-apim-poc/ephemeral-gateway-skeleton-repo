@@ -1,0 +1,40 @@
+Enterprise/Proxies/Consul-Get:
+  url: "/get/key*"
+  policy: "Enterprise/Proxies/Consul-Get"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Proxies/Consul-Route:
+  url: "/route/key*"
+  policy: "Enterprise/Proxies/Consul-Route"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Proxies/Consul-PUT:
+  url: "/put/key*"
+  policy: "Enterprise/Proxies/Consul-PUT"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Proxies/PROXY1:
+  url: "/rest/api01"
+  policy: "Enterprise/Proxies/PROXY1"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false

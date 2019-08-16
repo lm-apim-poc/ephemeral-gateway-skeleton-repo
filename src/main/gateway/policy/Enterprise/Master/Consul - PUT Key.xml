@@ -1,0 +1,74 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="Policy Fragment: Consul - PUT Key"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="************************************************************"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API :- Get OTK Client"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API Group :- API Security"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API TYPE :- &lt;REST/SOAP/DATA&gt;"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="Author: Balaji Radhakrishnan"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="************************************************************"/>
+        </L7p:CommentAssertion>
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[${endPointCalling}]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="proxyEP"/>
+        </L7p:SetVariable>
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[${request.http.uri}]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="param.uri"/>
+        </L7p:SetVariable>
+        <L7p:Regex>
+            <L7p:AutoTarget booleanValue="false"/>
+            <L7p:CaseInsensitive booleanValue="true"/>
+            <L7p:OtherTargetMessageVariable stringValue="param.uri"/>
+            <L7p:Regex stringValue="/put/key/"/>
+            <L7p:RegexName stringValue="process uri"/>
+            <L7p:Replace booleanValue="true"/>
+            <L7p:Replacement stringValue="/"/>
+            <L7p:Target target="OTHER"/>
+        </L7p:Regex>
+        <L7p:HttpRoutingAssertion>
+            <L7p:HttpMethod httpMethod="PUT"/>
+            <L7p:ProtectedServiceUrl stringValue="http://${gateway.consul.hostaddress}/v1/kv${param.uri}"/>
+            <L7p:ProxyPassword stringValueNull="null"/>
+            <L7p:ProxyUsername stringValueNull="null"/>
+            <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                <L7p:ForwardAll booleanValue="true"/>
+                <L7p:Rules httpPassthroughRules="included">
+                    <L7p:item httpPassthroughRule="included">
+                        <L7p:Name stringValue="Cookie"/>
+                    </L7p:item>
+                    <L7p:item httpPassthroughRule="included">
+                        <L7p:Name stringValue="SOAPAction"/>
+                    </L7p:item>
+                </L7p:Rules>
+            </L7p:RequestHeaderRules>
+            <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                <L7p:ForwardAll booleanValue="true"/>
+                <L7p:Rules httpPassthroughRules="included"/>
+            </L7p:RequestParamRules>
+            <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                <L7p:ForwardAll booleanValue="true"/>
+                <L7p:Rules httpPassthroughRules="included">
+                    <L7p:item httpPassthroughRule="included">
+                        <L7p:Name stringValue="Set-Cookie"/>
+                    </L7p:item>
+                </L7p:Rules>
+            </L7p:ResponseHeaderRules>
+            <L7p:SamlAssertionVersion intValue="2"/>
+        </L7p:HttpRoutingAssertion>
+        <L7p:CircuitBreaker L7p:Usage="Required" latencyCircuitCustomTrackerIdEnabled="false" latencyCircuitEnabled="false" latencyCircuitEventTrackerID="" latencyCircuitMaxFailures="5" latencyCircuitMaxLatency="500" latencyCircuitRecoveryPeriod="10000" latencyCircuitSamplingWindow="5000" policyFailureCircuitCustomTrackerIdEnabled="false" policyFailureCircuitEnabled="true" policyFailureCircuitEventTrackerID="" policyFailureCircuitMaxFailures="2" policyFailureCircuitRecoveryPeriod="10000" policyFailureCircuitSamplingWindow="5000"/>
+    </wsp:All>
+</wsp:Policy>

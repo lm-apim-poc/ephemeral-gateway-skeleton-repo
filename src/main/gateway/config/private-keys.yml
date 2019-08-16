@@ -1,0 +1,3 @@
+devproxy.broadcom.net:
+  keystore: "Software DB"
+  algorithm: "RSA"

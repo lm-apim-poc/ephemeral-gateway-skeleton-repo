@@ -1,0 +1,51 @@
+CONSUL - PUT Key:
+  policy: "Enterprise/Master/Consul - PUT Key"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Adding/Updating the Key/Value Stream in Consul"
+    passMetricsToParent: "true"
+CONSUL - DynamicRoute:
+  policy: "Enterprise/Master/Consul - Dynamic Route"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Retrieves specifc key/value from Consul and does a dynamic Route"
+    passMetricsToParent: "true"
+CONSUL - GET Key:
+  policy: "Enterprise/Master/Consul - GET Key"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results:
+  - name: "output"
+    type: "message"
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Retreive Value for a given Key from Consul Key/Value Stream"
+    passMetricsToParent: "true"
+CONSUL - Apply RateLimit:
+  policy: "Enterprise/Master/Consul - Apply RateLimit"
+  arguments:
+  - name: "domain"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "accessControl"
+    allowTracing: "true"
+    description: "Applying Rate Limit specific to given Domain using Consul Key/Value\
+      \ Stream."
+    passMetricsToParent: "true"
