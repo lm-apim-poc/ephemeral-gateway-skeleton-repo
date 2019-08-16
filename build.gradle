@@ -35,7 +35,8 @@ GatewayExportConfig {
 
 repositories {
     flatDir {
-        dirs new File (project.rootDir, "lib")
+
+        dirs new File(project.rootDir, "lib")
     }
     gradlePluginPortal()
     mavenCentral()
