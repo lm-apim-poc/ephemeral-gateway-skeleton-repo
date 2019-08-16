@@ -22,11 +22,13 @@ subprojects {
     if (!project.name.equals('deployment')) {
         apply plugin: 'com.ca.apim.gateway.gateway-export-plugin'
         GatewayConnection {
-            url = 'https://localhost:8443/restman'
+            url = 'https://devproxy.broadkom.net:9443/restman'
+            userName = 'admin'
+            userPass = '7layer'
         }
     }
 
-    group '<my.group.id>'
+    group 'com.ca.apim.gateway'
     version = '1.0.0'
 
     repositories {

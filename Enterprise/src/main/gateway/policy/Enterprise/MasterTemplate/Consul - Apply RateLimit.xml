@@ -1,0 +1,44 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="************************************************************"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API :- Get OTK Client"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API Group :- API Security"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API TYPE :- &lt;REST/SOAP/DATA&gt;"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="Author: Balaji Radhakrishnan"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="************************************************************"/>
+        </L7p:CommentAssertion>
+        <L7p:Include>
+            <L7p:PolicyGuid policyPath="Enterprise/MasterTemplate/Consul - GET Domain RateLimit"/>
+        </L7p:Include>
+        <wsp:All wsp:Usage="Required">
+            <L7p:SetVariable>
+                <L7p:Expression><![CDATA[${rateLimit.results[0]}]]></L7p:Expression>
+                <L7p:VariableToSet stringValue="rateLimit"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Expression><![CDATA[${spreadLimit.results[0]}]]></L7p:Expression>
+                <L7p:VariableToSet stringValue="spreadLimit"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Expression><![CDATA[/e35ac634-${request.clientid}/ratelimit]]></L7p:Expression>
+                <L7p:VariableToSet stringValue="param.uri"/>
+            </L7p:SetVariable>
+        </wsp:All>
+        <L7p:RateLimit>
+            <L7p:CounterName stringValue="${customData}"/>
+            <L7p:MaxRequestsPerSecond stringValue="${rateLimit}"/>
+            <L7p:WindowSizeInSeconds stringValue="${spreadLimit}"/>
+        </L7p:RateLimit>
+    </wsp:All>
+</wsp:Policy>

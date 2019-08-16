@@ -4,8 +4,6 @@
  *  of the MIT license.  See the LICENSE file for details.
  */
 
-dependencies {
-    bundle project(':Enterprise')
-    bundle project(':gmu')
-    bundle project(':Scheduler')
+GatewayExportConfig {
+    folderPath = '/gmu'
 }

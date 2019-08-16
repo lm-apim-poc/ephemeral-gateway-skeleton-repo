@@ -1,0 +1,288 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:AuditAssertion>
+            <L7p:Level stringValue="INFO"/>
+            <L7p:SaveRequest booleanValue="true"/>
+            <L7p:SaveResponse booleanValue="true"/>
+        </L7p:AuditAssertion>
+        <L7p:HttpRoutingAssertion>
+            <L7p:AssertionComment assertionComment="included">
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="//Get all nodes"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:AssertionComment>
+            <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/coordinate/nodes"/>
+            <L7p:ProxyPassword stringValueNull="null"/>
+            <L7p:ProxyUsername stringValueNull="null"/>
+            <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                <L7p:ForwardAll booleanValue="true"/>
+                <L7p:Rules httpPassthroughRules="included">
+                    <L7p:item httpPassthroughRule="included">
+                        <L7p:Name stringValue="Cookie"/>
+                    </L7p:item>
+                    <L7p:item httpPassthroughRule="included">
+                        <L7p:Name stringValue="SOAPAction"/>
+                    </L7p:item>
+                </L7p:Rules>
+            </L7p:RequestHeaderRules>
+            <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                <L7p:ForwardAll booleanValue="true"/>
+                <L7p:Rules httpPassthroughRules="included"/>
+            </L7p:RequestParamRules>
+            <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                <L7p:ForwardAll booleanValue="true"/>
+                <L7p:Rules httpPassthroughRules="included">
+                    <L7p:item httpPassthroughRule="included">
+                        <L7p:Name stringValue="Set-Cookie"/>
+                    </L7p:item>
+                </L7p:Rules>
+            </L7p:ResponseHeaderRules>
+            <L7p:SamlAssertionVersion intValue="2"/>
+        </L7p:HttpRoutingAssertion>
+        <L7p:EvaluateJsonPathExpressionV2>
+            <L7p:AssertionComment assertionComment="included">
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="// Parse node info"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:AssertionComment>
+            <L7p:Expression stringValue=".Node"/>
+            <L7p:Target target="RESPONSE"/>
+            <L7p:VariablePrefix stringValue="nodes"/>
+        </L7p:EvaluateJsonPathExpressionV2>
+        <L7p:ForEachLoop L7p:Usage="Required" loopVariable="nodes.result" variablePrefix="node">
+            <L7p:HttpRoutingAssertion>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Get health for node"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/health/node/${node.current}"/>
+                <L7p:ProxyPassword stringValueNull="null"/>
+                <L7p:ProxyUsername stringValueNull="null"/>
+                <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                    <L7p:ForwardAll booleanValue="true"/>
+                    <L7p:Rules httpPassthroughRules="included">
+                        <L7p:item httpPassthroughRule="included">
+                            <L7p:Name stringValue="Cookie"/>
+                        </L7p:item>
+                        <L7p:item httpPassthroughRule="included">
+                            <L7p:Name stringValue="SOAPAction"/>
+                        </L7p:item>
+                    </L7p:Rules>
+                </L7p:RequestHeaderRules>
+                <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                    <L7p:ForwardAll booleanValue="true"/>
+                    <L7p:Rules httpPassthroughRules="included"/>
+                </L7p:RequestParamRules>
+                <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                    <L7p:ForwardAll booleanValue="true"/>
+                    <L7p:Rules httpPassthroughRules="included">
+                        <L7p:item httpPassthroughRule="included">
+                            <L7p:Name stringValue="Set-Cookie"/>
+                        </L7p:item>
+                    </L7p:Rules>
+                </L7p:ResponseHeaderRules>
+                <L7p:SamlAssertionVersion intValue="2"/>
+            </L7p:HttpRoutingAssertion>
+            <L7p:EvaluateJsonPathExpressionV2>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Parse service names"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:Expression stringValue=".ServiceName"/>
+                <L7p:Target target="RESPONSE"/>
+                <L7p:VariablePrefix stringValue="serviceNames"/>
+            </L7p:EvaluateJsonPathExpressionV2>
+            <L7p:ForEachLoop L7p:Usage="Required" loopVariable="serviceNames.results" variablePrefix="serviceName">
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${serviceName.current}"/>
+                            <L7p:ExpressionIsVariable booleanValue="false"/>
+                            <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <L7p:HttpRoutingAssertion>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                                        <L7p:value stringValue="//Get service info"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/health/service/${serviceName.current}"/>
+                            <L7p:ProxyPassword stringValueNull="null"/>
+                            <L7p:ProxyUsername stringValueNull="null"/>
+                            <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                                <L7p:ForwardAll booleanValue="true"/>
+                                <L7p:Rules httpPassthroughRules="included">
+                                    <L7p:item httpPassthroughRule="included">
+                                        <L7p:Name stringValue="Cookie"/>
+                                    </L7p:item>
+                                    <L7p:item httpPassthroughRule="included">
+                                        <L7p:Name stringValue="SOAPAction"/>
+                                    </L7p:item>
+                                </L7p:Rules>
+                            </L7p:RequestHeaderRules>
+                            <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                                <L7p:ForwardAll booleanValue="true"/>
+                                <L7p:Rules httpPassthroughRules="included"/>
+                            </L7p:RequestParamRules>
+                            <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                                <L7p:ForwardAll booleanValue="true"/>
+                                <L7p:Rules httpPassthroughRules="included">
+                                    <L7p:item httpPassthroughRule="included">
+                                        <L7p:Name stringValue="Set-Cookie"/>
+                                    </L7p:item>
+                                </L7p:Rules>
+                            </L7p:ResponseHeaderRules>
+                            <L7p:SamlAssertionVersion intValue="2"/>
+                        </L7p:HttpRoutingAssertion>
+                        <L7p:EvaluateJsonPathExpressionV2>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                                        <L7p:value stringValue="// Parse service for all addresses"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Expression stringValue=".Service.Address"/>
+                            <L7p:Target target="RESPONSE"/>
+                            <L7p:VariablePrefix stringValue="serviceAddresses"/>
+                        </L7p:EvaluateJsonPathExpressionV2>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="Addresses retrieved from consul : ${serviceAddresses.results}"/>
+                            <L7p:LoggingOnly booleanValue="true"/>
+                        </L7p:AuditDetailAssertion>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <L7p:CacheLookup>
+                                <L7p:CacheEntryKey stringValue="${serviceName.current}"/>
+                                <L7p:CacheId stringValue="consul-service-reg-data"/>
+                                <L7p:ContentTypeOverride stringValue=""/>
+                                <L7p:MaxEntryAgeSeconds stringValue="600"/>
+                                <L7p:OtherTargetMessageVariable stringValue="serviceName.available"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:CacheLookup>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValueReference="inline"><![CDATA[Before Saving 
+Service name : ${serviceName.current}
+Addresses from Cache before storing : ${serviceName.available.mainpart}]]></L7p:Detail>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:OneOrMore>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:ComparisonAssertion>
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${serviceAddresses.results}"/>
+                                <L7p:ExpressionIsVariable booleanValue="false"/>
+                                <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                                <L7p:Operator operatorNull="null"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                        <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                        <L7p:CaseSensitive booleanValue="false"/>
+                                        <L7p:Negated booleanValue="true"/>
+                                        <L7p:Operator operator="EMPTY"/>
+                                        <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Before Saving Addresses retrieved from consul : ${serviceAddresses.results}"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Expression><![CDATA[${serviceAddresses.results}]]></L7p:Expression>
+                                <L7p:ContentType stringValue="text/plain; charset=utf-8"/>
+                                <L7p:DataType variableDataType="message"/>
+                                <L7p:VariableToSet stringValue="addrMessage"/>
+                            </L7p:SetVariable>
+                            <L7p:CacheStorage>
+                                <L7p:CacheEntryKey stringValue="${serviceName.current}"/>
+                                <L7p:CacheId stringValue="consul-service-reg-data"/>
+                                <L7p:MaxEntries stringValue="1000"/>
+                                <L7p:MaxEntryAgeSeconds stringValue="600"/>
+                                <L7p:MaxEntrySizeBytes stringValue="1000000"/>
+                                <L7p:OtherTargetMessageVariable stringValue="addrMessage"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:CacheStorage>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:CacheLookup>
+                                <L7p:CacheEntryKey stringValue="${serviceName.current}"/>
+                                <L7p:CacheId stringValue="consul-service-reg-data"/>
+                                <L7p:ContentTypeOverride stringValue=""/>
+                                <L7p:MaxEntryAgeSeconds stringValue="600"/>
+                                <L7p:OtherTargetMessageVariable stringValue="serviceName.available"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:CacheLookup>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValueReference="inline"><![CDATA[After Saving
+Service name : ${serviceName.current}
+Addresses from Cache after storing : ${serviceName.available.mainpart}]]></L7p:Detail>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:All>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${serviceName.current}"/>
+                            <L7p:ExpressionIsVariable booleanValue="false"/>
+                            <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                    </wsp:All>
+                </wsp:OneOrMore>
+            </L7p:ForEachLoop>
+            <L7p:FaultLevel>
+                <L7p:LevelInfo soapFaultLevel="included">
+                    <L7p:Level intValue="4"/>
+                </L7p:LevelInfo>
+            </L7p:FaultLevel>
+            <L7p:HardcodedResponse>
+                <L7p:ResponseBody><![CDATA[Ok]]></L7p:ResponseBody>
+                <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+            </L7p:HardcodedResponse>
+        </L7p:ForEachLoop>
+    </wsp:All>
+</wsp:Policy>

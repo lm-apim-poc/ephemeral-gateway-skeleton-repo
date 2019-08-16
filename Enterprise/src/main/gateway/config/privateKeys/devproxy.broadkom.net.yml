@@ -1,0 +1,4 @@
+devproxy.broadkom.net:
+  keystore: "Software DB"
+  algorithm: "RSA"
+  keyPassword: "7layer"

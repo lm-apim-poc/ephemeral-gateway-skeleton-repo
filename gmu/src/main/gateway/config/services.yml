@@ -1,0 +1,21 @@
+gmu/SAMPLE1:
+  url: "/gmu/apicall"
+  policy: "gmu/SAMPLE1"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties:
+    env: "sandbox"
+  wssProcessingEnabled: false
+gmu/SAMPLE2:
+  url: "/rest/apicall"
+  policy: "gmu/SAMPLE2"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false

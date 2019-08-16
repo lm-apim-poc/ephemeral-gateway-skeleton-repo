@@ -1,0 +1,10 @@
+Scheduler/CacheUpdate:
+  url: "/consul/cacheUpdate"
+  policy: "Scheduler/CacheUpdate"
+  httpMethods:
+    - "DELETE"
+    - "POST"
+    - "GET"
+    - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
