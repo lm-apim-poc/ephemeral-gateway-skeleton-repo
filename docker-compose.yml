@@ -15,7 +15,7 @@ services:
     - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
     - ./deployment/build/gateway/deployment-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7
     - ./Enterprise/src/main/gateway/config/global-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/global-env.properties
-    #- ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/privateKeys
+    - ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/privateKeys
     secrets:
     - source: license
       target: /opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml

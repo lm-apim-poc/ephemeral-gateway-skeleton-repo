@@ -6,7 +6,7 @@
 
 GatewayExportConfig {
     folderPath = '/Enterprise'
-    /*exportEntities = [
+    exportEntities = [
             privateKeys: [ "devproxy.broadkom.net" ]
-    ]*/
+    ]
 }
