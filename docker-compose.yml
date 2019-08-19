@@ -23,7 +23,7 @@ services:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"
       SSG_ADMIN_PASSWORD: "password"
-      #ENV.PRIVATE_KEY.devproxy.broadkom.net: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
+      ENV.PRIVATE_KEY.consulgw.security.broadcom.com: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
 secrets:
   license:
     file: ./docker/license.xml
