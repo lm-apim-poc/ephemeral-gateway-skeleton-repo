@@ -22,7 +22,7 @@ subprojects {
     if (!project.name.equals('deployment')) {
         apply plugin: 'com.ca.apim.gateway.gateway-export-plugin'
         GatewayConnection {
-            url = 'https://devproxy.broadkom.net:9443/restman'
+            url = 'https://consulgw.security.broadcom.com:9443/restman'
             userName = 'admin'
             userPass = '7layer'
         }
