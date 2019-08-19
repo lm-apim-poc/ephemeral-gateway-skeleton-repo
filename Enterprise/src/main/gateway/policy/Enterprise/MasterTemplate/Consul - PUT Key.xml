@@ -40,7 +40,8 @@
             <L7p:Target target="OTHER"/>
         </L7p:Regex>
         <L7p:HttpRoutingAssertion>
-            <L7p:ProtectedServiceUrl stringValue="http://${gateway.consul.hostaddress}/v1/kv${param.uri}"/>
+            <L7p:HttpMethod httpMethod="PUT"/>
+            <L7p:ProtectedServiceUrl stringValue="http://${gateway.consul.hostaddress}/kv${param.uri}"/>
             <L7p:ProxyPassword stringValueNull="null"/>
             <L7p:ProxyUsername stringValueNull="null"/>
             <L7p:RequestHeaderRules httpPassthroughRuleSet="included">

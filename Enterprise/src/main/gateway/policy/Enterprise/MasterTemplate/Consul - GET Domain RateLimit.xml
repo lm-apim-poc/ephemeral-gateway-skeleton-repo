@@ -28,7 +28,7 @@
                     <L7p:VariableToSet stringValue="param.uri"/>
                 </L7p:SetVariable>
                 <L7p:HttpRoutingAssertion>
-                    <L7p:ProtectedServiceUrl stringValue="http://${gateway.consul.hostaddress}/v1/kv${param.uri}"/>
+                    <L7p:ProtectedServiceUrl stringValue="http://${gateway.consul.hostaddress}/kv${param.uri}"/>
                     <L7p:ProxyPassword stringValueNull="null"/>
                     <L7p:ProxyUsername stringValueNull="null"/>
                     <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
