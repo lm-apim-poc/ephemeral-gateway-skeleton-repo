@@ -8,4 +8,8 @@ dependencies {
     bundle project(':Enterprise')
     bundle project(':gmu')
     bundle project(':Scheduler')
+    bundle project(':AWS-SK')
+    customassertion group: 'AWSAssertion', name: 'AWSAssertion', ext: 'jar', version: '1.0.05'
+    customassertion group: 'Aws4SignerAssertion', name: 'Aws4SignerAssertion', ext: 'jar', version: '1.0.05'
+
 }

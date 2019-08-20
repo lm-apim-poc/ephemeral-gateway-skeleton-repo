@@ -1,0 +1,265 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:SetVariable>
+            <L7p:AssertionComment assertionComment="included">
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="------------------------------------- Policy template input"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:AssertionComment>
+            <L7p:Expression><![CDATA[${config}]]></L7p:Expression>
+            <L7p:ContentType stringValue="application/json; charset=utf-8"/>
+            <L7p:DataType variableDataType="message"/>
+            <L7p:VariableToSet stringValue="awsConfig"/>
+        </L7p:SetVariable>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <wsp:All wsp:Usage="Required">
+                <L7p:EvaluateJsonPathExpression>
+                    <L7p:Expression stringValue="$.service.name"/>
+                    <L7p:OtherTargetMessageVariable stringValue="awsConfig"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="awsServiceName"/>
+                </L7p:EvaluateJsonPathExpression>
+                <L7p:EvaluateJsonPathExpression>
+                    <L7p:Expression stringValue="$.service.method"/>
+                    <L7p:OtherTargetMessageVariable stringValue="awsConfig"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="awsMethodName"/>
+                </L7p:EvaluateJsonPathExpression>
+                <L7p:EvaluateJsonPathExpression>
+                    <L7p:Expression stringValue="$.account.key"/>
+                    <L7p:OtherTargetMessageVariable stringValue="awsConfig"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="awsKey"/>
+                </L7p:EvaluateJsonPathExpression>
+                <L7p:EvaluateJsonPathExpression>
+                    <L7p:Expression stringValue="$.account.secret"/>
+                    <L7p:OtherTargetMessageVariable stringValue="awsConfig"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="awsSecretKey"/>
+                </L7p:EvaluateJsonPathExpression>
+                <L7p:EvaluateJsonPathExpression>
+                    <L7p:Expression stringValue="$.account.region"/>
+                    <L7p:OtherTargetMessageVariable stringValue="awsConfig"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="awsRegion"/>
+                </L7p:EvaluateJsonPathExpression>
+            </wsp:All>
+            <wsp:All wsp:Usage="Required">
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValue="Missing one or more required variable(s)"/>
+                </L7p:AuditDetailAssertion>
+                <L7p:SetVariable>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// initialize"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:Expression><![CDATA[{
+  &quot;message&quot;: &quot;Missing one or more required variables&quot;,
+  &quot;expect_format&quot;: {
+    &quot;service&quot;: {
+      &quot;name&quot;: &quot;REQUIRED service name&quot;,
+      &quot;method&quot;: &quot;REQUIRED method&quot;,
+      &quot;parameters&quot;: &quot;OPTIONAL depending on the chosen service and method above. Otherwise, provide json formatted parameters&quot;
+    },
+    &quot;account&quot;: {
+      &quot;key&quot;: &quot;REQUIRED. AWS access key&quot;,
+      &quot;secret&quot;: &quot;REQUIRED. AWS secret key&quot;,
+      &quot;region&quot;: &quot;REQUIRED. AWS region&quot;
+    }
+  }
+}]]></L7p:Expression>
+                    <L7p:VariableToSet stringValue="result"/>
+                </L7p:SetVariable>
+                <L7p:FalseAssertion/>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// error"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:All>
+            <L7p:assertionComment>
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="------------------------------------- Parse service and account configuration"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:assertionComment>
+        </wsp:OneOrMore>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <wsp:All wsp:Usage="Required">
+                <L7p:SetVariable>
+                    <L7p:Expression><![CDATA[${request.mainpart}]]></L7p:Expression>
+                    <L7p:ContentType stringValue="application/json; charset=utf-8"/>
+                    <L7p:DataType variableDataType="message"/>
+                    <L7p:VariableToSet stringValue="requestBody"/>
+                </L7p:SetVariable>
+                <L7p:EvaluateJsonPathExpression>
+                    <L7p:Expression stringValue="$."/>
+                    <L7p:OtherTargetMessageVariable stringValue="requestBody"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="parametersMsg"/>
+                </L7p:EvaluateJsonPathExpression>
+                <L7p:SetVariable>
+                    <L7p:Expression><![CDATA[1]]></L7p:Expression>
+                    <L7p:DataType variableDataType="int"/>
+                    <L7p:VariableToSet stringValue="containParameters"/>
+                </L7p:SetVariable>
+            </wsp:All>
+            <wsp:All wsp:Usage="Required">
+                <L7p:SetVariable>
+                    <L7p:Expression><![CDATA[0]]></L7p:Expression>
+                    <L7p:DataType variableDataType="int"/>
+                    <L7p:VariableToSet stringValue="containParameters"/>
+                </L7p:SetVariable>
+                <L7p:TrueAssertion/>
+            </wsp:All>
+            <L7p:assertionComment>
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="------------------------------------- Get request body, if any"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:assertionComment>
+        </wsp:OneOrMore>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <wsp:All wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Expression><![CDATA[${awsKey.result}]]></L7p:Expression>
+                        <L7p:VariableToSet stringValue="awsKey"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Expression><![CDATA[${awsSecretKey.result}]]></L7p:Expression>
+                        <L7p:VariableToSet stringValue="awsSecretKey"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Expression><![CDATA[${awsRegion.result}]]></L7p:Expression>
+                        <L7p:VariableToSet stringValue="awsRegion"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Expression><![CDATA[${awsServiceName.result}]]></L7p:Expression>
+                        <L7p:VariableToSet stringValue="awsServiceName"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Expression><![CDATA[${awsMethodName.result}]]></L7p:Expression>
+                        <L7p:VariableToSet stringValue="awsMethodName"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+            </wsp:All>
+            <wsp:All wsp:Usage="Required">
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValue="Invalid values for required variables"/>
+                </L7p:AuditDetailAssertion>
+                <L7p:SetVariable>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// initialize"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:Expression><![CDATA[{
+  &quot;message&quot;: &quot;Invalid value(s) for required variable(s)&quot;,
+  &quot;expect_format&quot;: {
+    &quot;service&quot;: {
+      &quot;name&quot;: &quot;REQUIRED: not empty and no space&quot;,
+      &quot;method&quot;: &quot;REQUIRED: not empty and no space&quot;,
+      &quot;parameters&quot;: &quot;OPTIONAL depending on the chosen service and method above. Otherwise, provide json formatted parameters&quot;
+    },
+    &quot;account&quot;: {
+      &quot;key&quot;: &quot;REQUIRED: not empty and no space&quot;,
+      &quot;secret&quot;: &quot;REQUIRED: not empty and no space&quot;,
+      &quot;region&quot;: &quot;REQUIRED: not empty and no space&quot;
+    }
+  }
+}]]></L7p:Expression>
+                    <L7p:VariableToSet stringValue="result"/>
+                </L7p:SetVariable>
+                <L7p:FalseAssertion/>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// error"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:All>
+            <L7p:assertionComment>
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="------------------------------------- Get all the provided variables"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:assertionComment>
+        </wsp:OneOrMore>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <wsp:All wsp:Usage="Required">
+                <L7p:ComparisonAssertion>
+                    <L7p:CaseSensitive booleanValue="false"/>
+                    <L7p:Expression1 stringValue="${containParameters}"/>
+                    <L7p:Operator operatorNull="null"/>
+                    <L7p:Predicates predicates="included">
+                        <L7p:item dataType="included">
+                            <L7p:Type variableDataType="int"/>
+                        </L7p:item>
+                        <L7p:item binary="included">
+                            <L7p:RightValue stringValue="1"/>
+                        </L7p:item>
+                    </L7p:Predicates>
+                </L7p:ComparisonAssertion>
+                <L7p:SetVariable>
+                    <L7p:Expression><![CDATA[${parametersMsg.result}]]></L7p:Expression>
+                    <L7p:VariableToSet stringValue="parameters"/>
+                </L7p:SetVariable>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="------------------------------------- Assign parameters"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:All>
+            <L7p:TrueAssertion/>
+        </wsp:OneOrMore>
+        <L7p:CustomAssertion>
+            <L7p:base64SerializedValue>rO0ABXNyADFjb20ubDd0ZWNoLnBvbGljeS5hc3NlcnRpb24uQ3VzdG9tQXNzZXJ0aW9uSG9sZGVyZtcreFwddTICAAlaAAxpc1VpQXV0b09wZW5MAApjYXRlZ29yaWVzdAAPTGphdmEvdXRpbC9TZXQ7TAAIY2F0ZWdvcnl0ACpMY29tL2w3dGVjaC9wb2xpY3kvYXNzZXJ0aW9uL2V4dC9DYXRlZ29yeTtMAA9jdXN0b21Bc3NlcnRpb250ADFMY29tL2w3dGVjaC9wb2xpY3kvYXNzZXJ0aW9uL2V4dC9DdXN0b21Bc3NlcnRpb247TAAUY3VzdG9tTW9kdWxlRmlsZU5hbWV0ABJMamF2YS9sYW5nL1N0cmluZztMAA9kZXNjcmlwdGlvblRleHRxAH4ABEwAD3BhbGV0dGVOb2RlTmFtZXEAfgAETAAOcG9saWN5Tm9kZU5hbWVxAH4ABEwAHnJlZ2lzdGVyZWRDdXN0b21GZWF0dXJlU2V0TmFtZXEAfgAEeHIAJWNvbS5sN3RlY2gucG9saWN5LmFzc2VydGlvbi5Bc3NlcnRpb27bX2OZPL2isQIAAloAB2VuYWJsZWRMABBhc3NlcnRpb25Db21tZW50dAAvTGNvbS9sN3RlY2gvcG9saWN5L2Fzc2VydGlvbi9Bc3NlcnRpb24kQ29tbWVudDt4cAFwAXNyABFqYXZhLnV0aWwuSGFzaFNldLpEhZWWuLc0AwAAeHB3DAAAAAI/QAAAAAAAAXNyAChjb20ubDd0ZWNoLnBvbGljeS5hc3NlcnRpb24uZXh0LkNhdGVnb3J5WrCcZaFE/jUCAAJJAAVteUtleUwABm15TmFtZXEAfgAEeHAAAAALdAAQQ3VzdG9tQXNzZXJ0aW9uc3hwc3IAF2NvbS5sN3RlY2guQVdTQXNzZXJ0aW9ubROolpAasoMCAAhMABFhc3NlcnRpb25VbmlxdWVJZHEAfgAETAAXYXdzQWNjb3VudENvbmZpZ3VyYXRpb250AChMY29tL2w3dGVjaC9hd3MvQVdTQWNjb3VudENvbmZpZ3VyYXRpb247TAAXYXdzU2VydmljZUNvbmZpZ3VyYXRpb250AChMY29tL2w3dGVjaC9hd3MvQVdTU2VydmljZUNvbmZpZ3VyYXRpb247TAAIYmFzZU5hbWVxAH4ABEwAEWRlc3RpbmF0aW9uVGFyZ2V0dABLTGNvbS9sN3RlY2gvcG9saWN5L2Fzc2VydGlvbi9leHQvdGFyZ2V0YWJsZS9DdXN0b21NZXNzYWdlVGFyZ2V0YWJsZVN1cHBvcnQ7TAAWZW50aXR5UmVmZXJlbmNlU3VwcG9ydHQAR0xjb20vbDd0ZWNoL3BvbGljeS9hc3NlcnRpb24vZXh0L2VudGl0eS9DdXN0b21SZWZlcmVuY2VFbnRpdGllc1N1cHBvcnQ7TAAJaW5wdXRUZXh0cQB+AARMAA9zZWxlY3RlZFNlcnZpY2VxAH4ABHhwdAAkOTdiZjIzODItNDQ2OS00OTVjLTgzOGItODFkNjY1MTlhZTA2c3IAJmNvbS5sN3RlY2guYXdzLkFXU0FjY291bnRDb25maWd1cmF0aW9u218+woYdeScCAAhMAAZhd3NLZXlxAH4ABEwAC2F3c0tleVZhbHVlcQB+AARMAAphd3NQcm9maWxlcQB+AARMAAlhd3NSZWdpb25xAH4ABEwADmF3c1JlZ2lvblZhbHVlcQB+AARMAAlhd3NTZWNyZXRxAH4ABEwADmF3c1NlY3JldFZhbHVlcQB+AARMAA9lbnRpdGllc1N1cHBvcnRxAH4AEXhwdAAJJHthd3NLZXl9cHB0AAwke2F3c1JlZ2lvbn1wdAAPJHthd3NTZWNyZXRLZXl9cHNyAEVjb20ubDd0ZWNoLnBvbGljeS5hc3NlcnRpb24uZXh0LmVudGl0eS5DdXN0b21SZWZlcmVuY2VFbnRpdGllc1N1cHBvcnTYlHneckWYyQIAAUwACnJlZmVyZW5jZXN0AA9MamF2YS91dGlsL01hcDt4cHNyABFqYXZhLnV0aWwuVHJlZU1hcAzB9j4tJWrmAwABTAAKY29tcGFyYXRvcnQAFkxqYXZhL3V0aWwvQ29tcGFyYXRvcjt4cHB3BAAAAAB4c3IAJmNvbS5sN3RlY2guYXdzLkFXU1NlcnZpY2VDb25maWd1cmF0aW9u5lb4WfI1tv0CAAtMAAphd3NTZXJ2aWNlcQB+AARMAA9hd3NTZXJ2aWNlVmFsdWVxAH4ABEwAD2VudGl0aWVzU3VwcG9ydHEAfgARTAAPZnVuY3Rpb25QYXlsb2FkcQB+AARMABRmdW5jdGlvblBheWxvYWRWYWx1ZXEAfgAETAAQZnVuY3Rpb25SZXNwb25zZXEAfgAETAAVZnVuY3Rpb25SZXNwb25zZVZhbHVlcQB+AARMAA9zZXJ2aWNlRnVuY3Rpb25xAH4ABEwAFHNlcnZpY2VGdW5jdGlvblZhbHVlcQB+AARMAA5zZXJ2aWNlSGFuZGxlcnEAfgAETAATc2VydmljZUhhbmRsZXJWYWx1ZXEAfgAEeHB0ABEke2F3c1NlcnZpY2VOYW1lfXBzcQB+ABlzcQB+ABxwdwQAAAAAeHQADSR7cGFyYW1ldGVyc31wdAAGcmVzdWx0cHQAECR7YXdzTWV0aG9kTmFtZX1wcHB0AA1BV1MgQXNzZXJ0aW9uc3IASWNvbS5sN3RlY2gucG9saWN5LmFzc2VydGlvbi5leHQudGFyZ2V0YWJsZS5DdXN0b21NZXNzYWdlVGFyZ2V0YWJsZVN1cHBvcnScd/FzZA3lagIAA1oAE3NvdXJjZVVzZWRCeUdhdGV3YXlaABd0YXJnZXRNb2RpZmllZEJ5R2F0ZXdheUwAFXRhcmdldE1lc3NhZ2VWYXJpYWJsZXEAfgAEeHABAHQACHJlc3BvbnNlc3EAfgAZc3EAfgAccHcEAAAAAHh0AABwdAAXQVdTQXNzZXJ0aW9uLTEuMC4wNS5qYXJwdAADQVdTdAARQVdTIChwb2xpY3kgbmFtZSlw</L7p:base64SerializedValue>
+        </L7p:CustomAssertion>
+        <L7p:HardcodedResponse>
+            <L7p:AssertionComment assertionComment="included">
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="------------------------------------- Tell me about it ...."/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:AssertionComment>
+            <L7p:ResponseBody><![CDATA[${result}]]></L7p:ResponseBody>
+            <L7p:ResponseContentType stringValue="application/json; charset=UTF-8"/>
+            <L7p:ResponseStatus stringValue="${aws.responseCode}"/>
+        </L7p:HardcodedResponse>
+    </wsp:All>
+</wsp:Policy>

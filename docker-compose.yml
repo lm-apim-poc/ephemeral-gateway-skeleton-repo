@@ -15,14 +15,14 @@ services:
     - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
     - ./deployment/build/gateway/deployment-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7
     - ./Enterprise/src/main/gateway/config/global-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/global-env.properties
-    - ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/privateKeys
+    - ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/config/privateKeys
     secrets:
     - source: license
       target: /opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
     environment:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"
-      SSG_ADMIN_PASSWORD: "password"
+      SSG_ADMIN_PASSWORD: "7layer"
       ENV.PRIVATE_KEY.consulgw.security.broadcom.com: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
 secrets:
   license:
