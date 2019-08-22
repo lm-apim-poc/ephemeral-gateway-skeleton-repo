@@ -1,3 +1,26 @@
+CONSUL - Catalog Search:
+  policy: "Enterprise/MasterTemplate/Consul - Catalog Search"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "false"
+    description: "Search the catalog based on input \n a. No input - brings all services\
+      \ in the catalog\n b. with specific service given - brings the details for that\
+      \ service."
+    passMetricsToParent: "false"
+CONSUL - Catalog Register:
+  policy: "Enterprise/MasterTemplate/Consul - Catalog Register"
+  arguments: []
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "false"
+    description: "For Registering Service with catalog"
+    passMetricsToParent: "false"
 CONSUL - PUT Key:
   policy: "Enterprise/MasterTemplate/Consul - PUT Key"
   arguments:
@@ -9,32 +32,6 @@ CONSUL - PUT Key:
     paletteFolder: "internalAssertions"
     allowTracing: "true"
     description: "Adding/Updating the Key/Value Stream in Consul"
-    passMetricsToParent: "true"
-CONSUL - DynamicRoute:
-  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route"
-  arguments:
-  - name: "endPointCalling"
-    type: "string"
-    requireExplicit: true
-  results: []
-  properties:
-    paletteFolder: "internalAssertions"
-    allowTracing: "true"
-    description: "Retrieves specifc key/value from Consul and does a dynamic Route"
-    passMetricsToParent: "true"
-CONSUL - GET Key:
-  policy: "Enterprise/MasterTemplate/Consul - GET Key"
-  arguments:
-  - name: "endPointCalling"
-    type: "string"
-    requireExplicit: true
-  results:
-  - name: "output"
-    type: "message"
-  properties:
-    paletteFolder: "internalAssertions"
-    allowTracing: "true"
-    description: "Retreive Value for a given Key from Consul Key/Value Stream"
     passMetricsToParent: "true"
 CONSUL - Apply RateLimit:
   policy: "Enterprise/MasterTemplate/Consul - Apply RateLimit"
@@ -48,4 +45,51 @@ CONSUL - Apply RateLimit:
     allowTracing: "true"
     description: "Applying Rate Limit specific to given Domain using Consul Key/Value\
       \ Stream."
+    passMetricsToParent: "true"
+CONSUL - DeRegister Catalog Service:
+  policy: "Enterprise/MasterTemplate/Consul - DeRegister Catalog"
+  arguments: []
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "false"
+    description: "Consul Deregister Service"
+    passMetricsToParent: "false"
+CONSUL - Dynamic Route with Key:
+  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route with Key"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Retrieves specifc key/value from Consul and does a dynamic Route"
+    passMetricsToParent: "true"
+Consul - Dynamic Route with Service:
+  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route with Service"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "false"
+    description: "Dynamic Route for Service in Catalog (consul)"
+    passMetricsToParent: "false"
+CONSUL - GET Key:
+  policy: "Enterprise/MasterTemplate/Consul - GET Key"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results:
+  - name: "output"
+    type: "message"
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Retreive Value for a given Key from Consul Key/Value Stream"
     passMetricsToParent: "true"

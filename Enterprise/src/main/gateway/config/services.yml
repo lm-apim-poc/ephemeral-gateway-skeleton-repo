@@ -1,16 +1,6 @@
-Enterprise/Proxies/Consul-Get:
-  url: "/get/key*"
-  policy: "Enterprise/Proxies/Consul-Get"
-  httpMethods:
-  - "DELETE"
-  - "POST"
-  - "GET"
-  - "PUT"
-  properties: {}
-  wssProcessingEnabled: false
-Enterprise/Proxies/Consul-Route:
+Enterprise/Consul/Consul-KeyRoute:
   url: "/route/key*"
-  policy: "Enterprise/Proxies/Consul-Route"
+  policy: "Enterprise/Consul/Consul-KeyRoute"
   httpMethods:
   - "DELETE"
   - "POST"
@@ -18,9 +8,39 @@ Enterprise/Proxies/Consul-Route:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
-Enterprise/Proxies/Consul-PUT:
-  url: "/put/key*"
-  policy: "Enterprise/Proxies/Consul-PUT"
+Enterprise/Consul/Consul-AgentService:
+  url: "/agent/services"
+  policy: "Enterprise/Consul/Consul-AgentService"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/Consul-DeRegisterService:
+  url: "/service/deregister"
+  policy: "Enterprise/Consul/Consul-DeRegisterService"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/Consul-Get:
+  url: "/get/key*"
+  policy: "Enterprise/Consul/Consul-Get"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/Consul-ServiceCatalog:
+  url: "/service/catalog*"
+  policy: "Enterprise/Consul/Consul-ServiceCatalog"
   httpMethods:
   - "DELETE"
   - "POST"
@@ -31,6 +51,86 @@ Enterprise/Proxies/Consul-PUT:
 Enterprise/Proxies/PROXY1:
   url: "/rest/api01"
   policy: "Enterprise/Proxies/PROXY1"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/Consul-RegisterService:
+  url: "/service/register"
+  policy: "Enterprise/Consul/Consul-RegisterService"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/Consul-PUT:
+  url: "/put/key*"
+  policy: "Enterprise/Consul/Consul-PUT"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/consul-CacheUpdate:
+  url: "/cache/update"
+  policy: "Enterprise/Consul/consul-CacheUpdate"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Proxies/CONTACT:
+  url: "/contact/*"
+  policy: "Enterprise/Proxies/CONTACT"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Consul/Consul-ServiceRoute:
+  url: "/microsvc*"
+  policy: "Enterprise/Consul/Consul-ServiceRoute"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Proxies/ORDER:
+  url: "/order/*"
+  policy: "Enterprise/Proxies/ORDER"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/AWS/AWS-Lambda:
+  url: "/lambda/getresponse"
+  policy: "Enterprise/AWS/AWS-Lambda"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+Enterprise/Proxies/CUSTOMER:
+  url: "/customer/*"
+  policy: "Enterprise/Proxies/CUSTOMER"
   httpMethods:
   - "DELETE"
   - "POST"
