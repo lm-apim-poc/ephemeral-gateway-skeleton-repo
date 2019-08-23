@@ -1,0 +1,3 @@
+consulgw.security.broadcom.com:
+  keystore: "Generic"
+  algorithm: "RSA"

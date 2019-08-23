@@ -177,6 +177,48 @@
                             <L7p:Target target="RESPONSE"/>
                             <L7p:VariablePrefix stringValue="serviceAddresses"/>
                         </L7p:EvaluateJsonPathExpressionV2>
+                        <L7p:EvaluateJsonPathExpressionV2>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                                        <L7p:value stringValue="// Parse service for all addresses"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:Expression stringValue=".Service.Port"/>
+                            <L7p:Target target="RESPONSE"/>
+                            <L7p:VariablePrefix stringValue="servicePort"/>
+                        </L7p:EvaluateJsonPathExpressionV2>
+                        <L7p:EvaluateJsonPathExpressionV2>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                                        <L7p:value stringValue="// Parse service for all addresses"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:Expression stringValue=".Service.Meta.url"/>
+                            <L7p:Target target="RESPONSE"/>
+                            <L7p:VariablePrefix stringValue="servicePath"/>
+                        </L7p:EvaluateJsonPathExpressionV2>
+                        <L7p:EvaluateJsonPathExpressionV2>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                                        <L7p:value stringValue="// Parse service for all addresses"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:Expression stringValue=".Service.Meta.protocol"/>
+                            <L7p:Target target="RESPONSE"/>
+                            <L7p:VariablePrefix stringValue="serviceProtocol"/>
+                        </L7p:EvaluateJsonPathExpressionV2>
                         <L7p:AuditDetailAssertion>
                             <L7p:Detail stringValue="Addresses retrieved from consul : ${serviceAddresses.results}"/>
                             <L7p:Enabled booleanValue="false"/>

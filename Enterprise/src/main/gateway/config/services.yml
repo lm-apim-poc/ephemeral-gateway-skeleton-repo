@@ -118,16 +118,6 @@ Enterprise/Proxies/ORDER:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
-Enterprise/AWS/AWS-Lambda:
-  url: "/lambda/getresponse"
-  policy: "Enterprise/AWS/AWS-Lambda"
-  httpMethods:
-  - "DELETE"
-  - "POST"
-  - "GET"
-  - "PUT"
-  properties: {}
-  wssProcessingEnabled: false
 Enterprise/Proxies/CUSTOMER:
   url: "/customer/*"
   policy: "Enterprise/Proxies/CUSTOMER"

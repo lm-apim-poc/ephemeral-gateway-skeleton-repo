@@ -1,0 +1,10 @@
+AWS-SK/AWS-Lambda:
+  url: "/lambda/getresponse"
+  policy: "AWS-SK/AWS-Lambda"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
