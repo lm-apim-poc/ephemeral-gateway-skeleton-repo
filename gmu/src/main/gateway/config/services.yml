@@ -7,7 +7,7 @@ gmu/SAMPLE1:
   - "GET"
   - "PUT"
   properties:
-    env: "sandbox"
+    env: "sandbox1"
   wssProcessingEnabled: false
 gmu/SAMPLE2:
   url: "/rest/apicall"
