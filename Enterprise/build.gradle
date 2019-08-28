@@ -8,6 +8,6 @@ GatewayExportConfig {
     folderPath = '/Enterprise'
     exportEntities = [
             privateKeys: [ "ephemeral.aws.com" ],
-            certificates: ["localhost"]
+            certificates: ["ephemeral.aws.com"]
     ]
 }
