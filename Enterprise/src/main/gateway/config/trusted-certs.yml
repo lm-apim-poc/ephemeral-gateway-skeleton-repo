@@ -1,0 +1,9 @@
+ephemeral.aws.com:
+  verifyHostname: false
+  trustedForSsl: true
+  trustedAsSamlAttestingEntity: true
+  trustAnchor: true
+  revocationCheckingEnabled: true
+  trustedForSigningClientCerts: true
+  trustedForSigningServerCerts: true
+  trustedAsSamlIssuer: true

@@ -49,6 +49,8 @@
             <wsp:All wsp:Usage="Required">
                 <L7p:HttpRoutingAssertion>
                     <L7p:HttpMethod httpMethod="GET"/>
+                    <L7p:KeyAlias stringValue="ephemeral.aws.com"/>
+                    <L7p:NonDefaultKeystoreId goidValue="00000000000000000000000000000005"/>
                     <L7p:ProtectedServiceUrl stringValue="${MSKeyInfoURL}"/>
                     <L7p:ProxyPassword stringValueNull="null"/>
                     <L7p:ProxyUsername stringValueNull="null"/>
@@ -86,6 +88,8 @@
                 </L7p:EvaluateJsonPathExpressionV2>
                 <L7p:HttpRoutingAssertion>
                     <L7p:HttpMethod httpMethod="GET"/>
+                    <L7p:KeyAlias stringValue="ephemeral.aws.com"/>
+                    <L7p:NonDefaultKeystoreId goidValue="00000000000000000000000000000005"/>
                     <L7p:ProtectedServiceUrl stringValue="${jwksURL.result}"/>
                     <L7p:ProxyPassword stringValueNull="null"/>
                     <L7p:ProxyUsername stringValueNull="null"/>
@@ -127,7 +131,7 @@
             <wsp:All wsp:Usage="Required">
                 <L7p:DecodeJsonWebToken>
                     <L7p:FailUnverifiedSignature booleanValue="true"/>
-                    <L7p:KeyId stringValue="ssl"/>
+                    <L7p:KeyId stringValue="7layer"/>
                     <L7p:KeyType stringValue="JSON Web Key Set"/>
                     <L7p:PrivateKeySource stringValue="${keyResp.mainpart}"/>
                     <L7p:SourcePayload stringValue="${jwt}"/>

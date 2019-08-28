@@ -14,8 +14,10 @@ services:
     volumes:
     - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
     - ./deployment/build/gateway/deployment-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7
+    #- ./AWS-SK/src/main/gateway/config/global-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/global-env.properties
     - ./Enterprise/src/main/gateway/config/global-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/global-env.properties
     - ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/config/privateKeys
+    #- ./Enterprise/src/main/gateway/config/certificates:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/certificates
     secrets:
     - source: license
       target: /opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
@@ -23,7 +25,37 @@ services:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"
       SSG_ADMIN_PASSWORD: "7layer"
-      ENV.PRIVATE_KEY.consulgw.security.broadcom.com: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
+      ENV.PRIVATE_KEY.ephemeral.aws.com: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
+      ENV.CERTIFICATE.ephemeral.aws.com: '{
+                      "verifyHostname" : false,
+                      "trustedForSsl" : true,
+                      "trustedAsSamlAttestingEntity" : true,
+                      "trustAnchor" : true,
+                      "revocationCheckingEnabled" : true,
+                      "trustedForSigningClientCerts" : true,
+                      "trustedForSigningServerCerts" : true,
+                      "trustedAsSamlIssuer" : true
+                      }'
+      ENV.CERTIFICATE_FILE.ephemeral.aws.com.pem: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIC/DCCAeSgAwIBAgIIYYoY9A0yh28wDQYJKoZIhvcNAQEMBQAwHDEaMBgGA1UE
+                        AxMRZXBoZW1lcmFsLmF3cy5jb20wHhcNMTkwODI3MTQ1ODM5WhcNMjQwODI1MTQ1
+                        ODM5WjAcMRowGAYDVQQDExFlcGhlbWVyYWwuYXdzLmNvbTCCASIwDQYJKoZIhvcN
+                        AQEBBQADggEPADCCAQoCggEBAIJm7nWS6L9ep8L8Dd38jJMtaDebMJGojF9dGxnT
+                        fCiCoSy7/zjJY7WX81+Vph4HmbdhBNGhXlFu3rwJjgAEG7WJ4wcDzuQFvzX7wdrb
+                        fCcFFRpfdwoZkEpX0/p5lWGNHkLStmekvrztE+6Q/AbjUwfU1tAP4/0Pgh6ixR/Z
+                        z9mpkysjRc/587WGK2RkcwIDPK+oj88XnEcC7JMlJl5kLOgNDskPzAdmV5BAWAiR
+                        chJdzwnYmxHFEUGRnWkmmVVaYn97Gnb0IvOl6wx0RSmN5M0JwzNp5So0x3eZdZPE
+                        AR7cQLmpK50BtFOmxQLfGlIMIvIftaOLU3O6yIx4XkIvIO0CAwEAAaNCMEAwHQYD
+                        VR0OBBYEFBlIA44U5nPLyPGO0GyNnoCU1epEMB8GA1UdIwQYMBaAFBlIA44U5nPL
+                        yPGO0GyNnoCU1epEMA0GCSqGSIb3DQEBDAUAA4IBAQBGsOZtyIkSOPq91aL6FPhT
+                        p2yj3w1tjP4Xg2um0+GWEERgLgtizLaPxyEcUAKvcPhM8qYWapzPrORmr6WUg9kE
+                        3fIKJLHL5QAQ0/THAGBAH+vi9y8WYHWLN96i2DLORdgU0rQLzmjO07qq5Ng9ty1p
+                        sdxU9Yo4traxtnPQ68MIjFw8RBotGTEHzCpzjoczsgTEYZXq5TnNPFFl7tVMf540
+                        mkpTkPPhTq1JAtX9evAbadnim00tksbJDAtjF1MMxAheSayV50a6B8A1xdP0jnnT
+                        EwDUfI25x3kEmwW4VNHPTMzBT0qOEeKiS5dmXX1FcjOqreY2+ldr5iqSy1wvYC7P
+
+                        -----END CERTIFICATE-----
 secrets:
   license:
     file: ./docker/license.xml
