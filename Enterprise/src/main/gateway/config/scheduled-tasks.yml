@@ -1,8 +1,8 @@
-CONSUL-CatalogSync:
-  policy: "Enterprise/MasterTemplate/CONSUL-CatalogSync"
+Consul-SyncTask:
+  policy: "Enterprise/MasterTemplate/Consul-CatalogSync"
   isOneNode: false
   jobType: "Recurring"
   jobStatus: "Scheduled"
-  cronExpression: "0 */2 * * * ?"
-  shouldExecuteOnCreate: false
+  cronExpression: "0 */5 * * * ?"
+  shouldExecuteOnCreate: true
   properties: {}

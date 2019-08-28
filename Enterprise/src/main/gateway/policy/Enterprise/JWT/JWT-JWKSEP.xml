@@ -1,0 +1,24 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:CreateJsonWebKey>
+            <L7p:Keys keys="included">
+                <L7p:item key="included">
+                    <L7p:KeyId stringValue="ssl"/>
+                    <L7p:PublicKeyUse stringValue="Signature"/>
+                    <L7p:SourceKeyGoid goidValue="0000000000000000ffffffffffffffff"/>
+                </L7p:item>
+                <L7p:item key="included">
+                    <L7p:KeyId stringValue="7layer"/>
+                    <L7p:PublicKeyUse stringValue="Signature"/>
+                    <L7p:SourceKeyAlias stringValue="ephemeral.aws.com"/>
+                    <L7p:SourceKeyGoid goidValue="00000000000000000000000000000005"/>
+                </L7p:item>
+            </L7p:Keys>
+            <L7p:TargetVariable stringValue="jwk"/>
+        </L7p:CreateJsonWebKey>
+        <L7p:HardcodedResponse>
+            <L7p:ResponseBody><![CDATA[${jwk}]]></L7p:ResponseBody>
+            <L7p:ResponseContentType stringValue="application/json; charset=UTF-8"/>
+        </L7p:HardcodedResponse>
+    </wsp:All>
+</wsp:Policy>

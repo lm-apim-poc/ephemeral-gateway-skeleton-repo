@@ -1,0 +1,173 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="************************************************************"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API :- Validate JWT Token"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API Group :- API Security"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="API TYPE :- &lt;REST/SOAP/DATA&gt;"/>
+        </L7p:CommentAssertion>
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="************************************************************"/>
+        </L7p:CommentAssertion>
+        <wsp:All wsp:Usage="Required">
+            <L7p:SetVariable>
+                <L7p:Expression><![CDATA[${request.http.header.Authorization}]]></L7p:Expression>
+                <L7p:VariableToSet stringValue="jwt"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Expression/>
+                <L7p:ContentType stringValue="application/json; charset=utf-8"/>
+                <L7p:DataType variableDataType="message"/>
+                <L7p:VariableToSet stringValue="MSKeyInfoResp"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Expression><![CDATA[https://localhost:8443/.well-known/v2.0/openid-configuration]]></L7p:Expression>
+                <L7p:VariableToSet stringValue="MSKeyInfoURL"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Expression><![CDATA[jwks]]></L7p:Expression>
+                <L7p:VariableToSet stringValue="cacheKey"/>
+            </L7p:SetVariable>
+        </wsp:All>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                <L7p:CacheLookup>
+                    <L7p:CacheEntryKey stringValue="${cacheKey}"/>
+                    <L7p:CacheId stringValue="jwks"/>
+                    <L7p:ContentTypeOverride stringValue=""/>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:OtherTargetMessageVariable stringValue="keyResp"/>
+                    <L7p:Target target="OTHER"/>
+                </L7p:CacheLookup>
+            </wsp:All>
+            <wsp:All wsp:Usage="Required">
+                <L7p:HttpRoutingAssertion>
+                    <L7p:HttpMethod httpMethod="GET"/>
+                    <L7p:ProtectedServiceUrl stringValue="${MSKeyInfoURL}"/>
+                    <L7p:ProxyPassword stringValueNull="null"/>
+                    <L7p:ProxyUsername stringValueNull="null"/>
+                    <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                        <L7p:ForwardAll booleanValue="true"/>
+                        <L7p:Rules httpPassthroughRules="included">
+                            <L7p:item httpPassthroughRule="included">
+                                <L7p:Name stringValue="Cookie"/>
+                            </L7p:item>
+                            <L7p:item httpPassthroughRule="included">
+                                <L7p:Name stringValue="SOAPAction"/>
+                            </L7p:item>
+                        </L7p:Rules>
+                    </L7p:RequestHeaderRules>
+                    <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                        <L7p:ForwardAll booleanValue="true"/>
+                        <L7p:Rules httpPassthroughRules="included"/>
+                    </L7p:RequestParamRules>
+                    <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                        <L7p:ForwardAll booleanValue="true"/>
+                        <L7p:Rules httpPassthroughRules="included">
+                            <L7p:item httpPassthroughRule="included">
+                                <L7p:Name stringValue="Set-Cookie"/>
+                            </L7p:item>
+                        </L7p:Rules>
+                    </L7p:ResponseHeaderRules>
+                    <L7p:ResponseMsgDest stringValue="MSKeyInfoResp"/>
+                    <L7p:SamlAssertionVersion intValue="2"/>
+                </L7p:HttpRoutingAssertion>
+                <L7p:EvaluateJsonPathExpressionV2>
+                    <L7p:Expression stringValue="$.jwks_uri"/>
+                    <L7p:OtherTargetMessageVariable stringValue="MSKeyInfoResp"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="jwksURL"/>
+                </L7p:EvaluateJsonPathExpressionV2>
+                <L7p:HttpRoutingAssertion>
+                    <L7p:HttpMethod httpMethod="GET"/>
+                    <L7p:ProtectedServiceUrl stringValue="${jwksURL.result}"/>
+                    <L7p:ProxyPassword stringValueNull="null"/>
+                    <L7p:ProxyUsername stringValueNull="null"/>
+                    <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                        <L7p:ForwardAll booleanValue="true"/>
+                        <L7p:Rules httpPassthroughRules="included">
+                            <L7p:item httpPassthroughRule="included">
+                                <L7p:Name stringValue="Cookie"/>
+                            </L7p:item>
+                            <L7p:item httpPassthroughRule="included">
+                                <L7p:Name stringValue="SOAPAction"/>
+                            </L7p:item>
+                        </L7p:Rules>
+                    </L7p:RequestHeaderRules>
+                    <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                        <L7p:ForwardAll booleanValue="true"/>
+                        <L7p:Rules httpPassthroughRules="included"/>
+                    </L7p:RequestParamRules>
+                    <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                        <L7p:ForwardAll booleanValue="true"/>
+                        <L7p:Rules httpPassthroughRules="included">
+                            <L7p:item httpPassthroughRule="included">
+                                <L7p:Name stringValue="Set-Cookie"/>
+                            </L7p:item>
+                        </L7p:Rules>
+                    </L7p:ResponseHeaderRules>
+                    <L7p:ResponseMsgDest stringValue="keyResp"/>
+                    <L7p:SamlAssertionVersion intValue="2"/>
+                </L7p:HttpRoutingAssertion>
+                <L7p:CacheStorage>
+                    <L7p:CacheEntryKey stringValue="${cacheKey}"/>
+                    <L7p:CacheId stringValue="jwks"/>
+                    <L7p:OtherTargetMessageVariable stringValue="keyResp"/>
+                    <L7p:Target target="OTHER"/>
+                </L7p:CacheStorage>
+            </wsp:All>
+        </wsp:OneOrMore>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <wsp:All wsp:Usage="Required">
+                <L7p:DecodeJsonWebToken>
+                    <L7p:FailUnverifiedSignature booleanValue="true"/>
+                    <L7p:KeyId stringValue="ssl"/>
+                    <L7p:KeyType stringValue="JSON Web Key Set"/>
+                    <L7p:PrivateKeySource stringValue="${keyResp.mainpart}"/>
+                    <L7p:SourcePayload stringValue="${jwt}"/>
+                    <L7p:TargetVariablePrefix stringValue="decode"/>
+                    <L7p:ValidationType stringValue="Using Recipient Key From Context Variable"/>
+                </L7p:DecodeJsonWebToken>
+                <L7p:HardcodedResponse>
+                    <L7p:ResponseBody><![CDATA[${lambdaResp}
+
+JWK:
+${jwk}
+${keyResp.mainpart}
+
+JWT:
+${jwt.compact}
+
+Decoded JWT:
+${decode.header}
+${decode.payload}
+${decode.signature}
+${decode.encryptedkey}]]></L7p:ResponseBody>
+                    <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+                </L7p:HardcodedResponse>
+            </wsp:All>
+            <wsp:All wsp:Usage="Required">
+                <L7p:CustomizeErrorResponse>
+                    <L7p:Content stringValueReference="inline"><![CDATA[{
+    "Error" : " Authentication Failure",
+   "Descripton" : "Invalidate JWT Token - Please check and try again."
+}]]></L7p:Content>
+                    <L7p:ContentType stringValue="application/json; charset=UTF-8"/>
+                    <L7p:ExtraHeaders nameValuePairArray="included">
+                        <L7p:item nameValuePair="included">
+                            <L7p:Key stringValue="x.broadcom.error"/>
+                            <L7p:Value stringValue="Request Failer"/>
+                        </L7p:item>
+                    </L7p:ExtraHeaders>
+                </L7p:CustomizeErrorResponse>
+                <L7p:RaiseError/>
+            </wsp:All>
+        </wsp:OneOrMore>
+    </wsp:All>
+</wsp:Policy>

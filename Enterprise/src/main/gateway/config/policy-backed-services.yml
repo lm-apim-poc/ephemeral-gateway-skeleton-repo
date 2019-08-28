@@ -1,0 +1,5 @@
+Consul-BackgroundSyncService:
+  interfaceName: "com.l7tech.objectmodel.polback.BackgroundTask"
+  operations:
+  - policy: "Enterprise/MasterTemplate/Consul-CatalogSync"
+    operationName: "run"
