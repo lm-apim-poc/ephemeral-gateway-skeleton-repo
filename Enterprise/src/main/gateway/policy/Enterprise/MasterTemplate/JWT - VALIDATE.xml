@@ -79,6 +79,7 @@
                     </L7p:ResponseHeaderRules>
                     <L7p:ResponseMsgDest stringValue="MSKeyInfoResp"/>
                     <L7p:SamlAssertionVersion intValue="2"/>
+                    <L7p:UsesDefaultKeyStore booleanValue="false"/>
                 </L7p:HttpRoutingAssertion>
                 <L7p:EvaluateJsonPathExpressionV2>
                     <L7p:Expression stringValue="$.jwks_uri"/>
@@ -118,6 +119,7 @@
                     </L7p:ResponseHeaderRules>
                     <L7p:ResponseMsgDest stringValue="keyResp"/>
                     <L7p:SamlAssertionVersion intValue="2"/>
+                    <L7p:UsesDefaultKeyStore booleanValue="false"/>
                 </L7p:HttpRoutingAssertion>
                 <L7p:CacheStorage>
                     <L7p:CacheEntryKey stringValue="${cacheKey}"/>
