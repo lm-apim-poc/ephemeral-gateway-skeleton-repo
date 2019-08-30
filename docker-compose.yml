@@ -56,6 +56,35 @@ services:
                         EwDUfI25x3kEmwW4VNHPTMzBT0qOEeKiS5dmXX1FcjOqreY2+ldr5iqSy1wvYC7P
 
                         -----END CERTIFICATE-----
+      ENV.CERTIFICATE.localhost: '{
+                            "verifyHostname" : false,
+                            "trustedForSsl" : true,
+                            "trustedAsSamlAttestingEntity" : true,
+                            "trustAnchor" : true,
+                            "revocationCheckingEnabled" : true,
+                            "trustedForSigningClientCerts" : true,
+                            "trustedForSigningServerCerts" : true,
+                            "trustedAsSamlIssuer" : true
+                            }'
+      ENV.CERTIFICATE_FILE.localhost.pem: |-
+                        -----BEGIN CERTIFICATE-----
+                        MIIC7DCCAdSgAwIBAgIIeHYshjhzQl8wDQYJKoZIhvcNAQEMBQAwFDESMBAGA1UE
+                        AxMJbG9jYWxob3N0MB4XDTE5MDgyOTE0MDkxMVoXDTI5MDgyNjE0MDkxMVowFDES
+                        MBAGA1UEAxMJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+                        AQEA49Gu+a7nmwarOT/FLZKkGUK8Z9OR58M+LNZdJmMaDHTqkRrWWFyH+TC9Smpr
+                        vd5ogkHikfkndcDd1HkTcLGT98J3lwvuuBZg8j678oGVzxqj38bqlkG8VKzofjPH
+                        71UUJWIMxgJcI0+mdMlkeIXoFoc8ED38J7i7/7jviP2Pxr1lXDK7O4WS0uId8r/X
+                        0222urzF8XaLLRcYibhnMrTaOYHbZjwlTXl/EamfSnomVzHjtMGNynjyE1L+qPiN
+                        QC4/xYPLPjn1X8ObS2wzPQkVRDu/WbKzlgcfkHAa68IN93tCoX/z73cSKiisrfbW
+                        sxKLA1Uaz60komNCL8Wgm7BQwwIDAQABo0IwQDAdBgNVHQ4EFgQUxJltWrexNjpD
+                        DIDZMZtLvgCu3o0wHwYDVR0jBBgwFoAUxJltWrexNjpDDIDZMZtLvgCu3o0wDQYJ
+                        KoZIhvcNAQEMBQADggEBALlg+GedzoWo77xIV25ah2AF0jm5/OT5D0a85Sf/aZl8
+                        iocehPLSvgsUxVhWN8wOiRkfNp/RM+9/9a4KY+03qZ7CTSFkQgs/iRa6n85zEyG7
+                        yP+sZuQ7clH82hCWI6VSP4sapkPKCm8kLnV0Uz0jjVWcXaNENPC3VXA6D6eFp7YX
+                        49m8GTeWit8sD/bm2i3V0jgeZvMUjJtHrhzemT3hPAY9L7qLBwZf+yvf0hOmvTdj
+                        nDUt+YsE7z5t1LvLLSoT0fQE7W/gPntVieIMTyxS2BnXMAOCv0vgJw6PNepNYOzq
+                        05ZgjAiJe0qgmG7xnXxbNdH1dqxPc/0xlxOqcAO+x0A=
+                        -----END CERTIFICATE-----
 secrets:
   license:
     file: ./docker/license.xml
