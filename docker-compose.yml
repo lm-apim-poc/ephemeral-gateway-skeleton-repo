@@ -16,7 +16,7 @@ services:
     - ./deployment/build/gateway/deployment-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7
     #- ./AWS-SK/src/main/gateway/config/global-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/global-env.properties
     - ./Enterprise/src/main/gateway/config/global-env.properties:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/global-env.properties
-    - ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/config/privateKeys
+    #- ./Enterprise/src/main/gateway/config/privateKeys:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/env/config/privateKeys
     #- ./Enterprise/src/main/gateway/config/certificates:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/certificates
     secrets:
     - source: license
@@ -25,66 +25,66 @@ services:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"
       SSG_ADMIN_PASSWORD: "7layer"
-      ENV.PRIVATE_KEY.ephemeral.aws.com: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
-      ENV.CERTIFICATE.ephemeral.aws.com: '{
-                      "verifyHostname" : false,
-                      "trustedForSsl" : true,
-                      "trustedAsSamlAttestingEntity" : true,
-                      "trustAnchor" : true,
-                      "revocationCheckingEnabled" : true,
-                      "trustedForSigningClientCerts" : true,
-                      "trustedForSigningServerCerts" : true,
-                      "trustedAsSamlIssuer" : true
-                      }'
-      ENV.CERTIFICATE_FILE.ephemeral.aws.com.pem: |-
-                        -----BEGIN CERTIFICATE-----
-                        MIIC/DCCAeSgAwIBAgIIYYoY9A0yh28wDQYJKoZIhvcNAQEMBQAwHDEaMBgGA1UE
-                        AxMRZXBoZW1lcmFsLmF3cy5jb20wHhcNMTkwODI3MTQ1ODM5WhcNMjQwODI1MTQ1
-                        ODM5WjAcMRowGAYDVQQDExFlcGhlbWVyYWwuYXdzLmNvbTCCASIwDQYJKoZIhvcN
-                        AQEBBQADggEPADCCAQoCggEBAIJm7nWS6L9ep8L8Dd38jJMtaDebMJGojF9dGxnT
-                        fCiCoSy7/zjJY7WX81+Vph4HmbdhBNGhXlFu3rwJjgAEG7WJ4wcDzuQFvzX7wdrb
-                        fCcFFRpfdwoZkEpX0/p5lWGNHkLStmekvrztE+6Q/AbjUwfU1tAP4/0Pgh6ixR/Z
-                        z9mpkysjRc/587WGK2RkcwIDPK+oj88XnEcC7JMlJl5kLOgNDskPzAdmV5BAWAiR
-                        chJdzwnYmxHFEUGRnWkmmVVaYn97Gnb0IvOl6wx0RSmN5M0JwzNp5So0x3eZdZPE
-                        AR7cQLmpK50BtFOmxQLfGlIMIvIftaOLU3O6yIx4XkIvIO0CAwEAAaNCMEAwHQYD
-                        VR0OBBYEFBlIA44U5nPLyPGO0GyNnoCU1epEMB8GA1UdIwQYMBaAFBlIA44U5nPL
-                        yPGO0GyNnoCU1epEMA0GCSqGSIb3DQEBDAUAA4IBAQBGsOZtyIkSOPq91aL6FPhT
-                        p2yj3w1tjP4Xg2um0+GWEERgLgtizLaPxyEcUAKvcPhM8qYWapzPrORmr6WUg9kE
-                        3fIKJLHL5QAQ0/THAGBAH+vi9y8WYHWLN96i2DLORdgU0rQLzmjO07qq5Ng9ty1p
-                        sdxU9Yo4traxtnPQ68MIjFw8RBotGTEHzCpzjoczsgTEYZXq5TnNPFFl7tVMf540
-                        mkpTkPPhTq1JAtX9evAbadnim00tksbJDAtjF1MMxAheSayV50a6B8A1xdP0jnnT
-                        EwDUfI25x3kEmwW4VNHPTMzBT0qOEeKiS5dmXX1FcjOqreY2+ldr5iqSy1wvYC7P
-
-                        -----END CERTIFICATE-----
-      ENV.CERTIFICATE.localhost: '{
-                            "verifyHostname" : false,
-                            "trustedForSsl" : true,
-                            "trustedAsSamlAttestingEntity" : true,
-                            "trustAnchor" : true,
-                            "revocationCheckingEnabled" : true,
-                            "trustedForSigningClientCerts" : true,
-                            "trustedForSigningServerCerts" : true,
-                            "trustedAsSamlIssuer" : true
-                            }'
-      ENV.CERTIFICATE_FILE.localhost.pem: |-
-                        -----BEGIN CERTIFICATE-----
-                        MIIC7DCCAdSgAwIBAgIIeHYshjhzQl8wDQYJKoZIhvcNAQEMBQAwFDESMBAGA1UE
-                        AxMJbG9jYWxob3N0MB4XDTE5MDgyOTE0MDkxMVoXDTI5MDgyNjE0MDkxMVowFDES
-                        MBAGA1UEAxMJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-                        AQEA49Gu+a7nmwarOT/FLZKkGUK8Z9OR58M+LNZdJmMaDHTqkRrWWFyH+TC9Smpr
-                        vd5ogkHikfkndcDd1HkTcLGT98J3lwvuuBZg8j678oGVzxqj38bqlkG8VKzofjPH
-                        71UUJWIMxgJcI0+mdMlkeIXoFoc8ED38J7i7/7jviP2Pxr1lXDK7O4WS0uId8r/X
-                        0222urzF8XaLLRcYibhnMrTaOYHbZjwlTXl/EamfSnomVzHjtMGNynjyE1L+qPiN
-                        QC4/xYPLPjn1X8ObS2wzPQkVRDu/WbKzlgcfkHAa68IN93tCoX/z73cSKiisrfbW
-                        sxKLA1Uaz60komNCL8Wgm7BQwwIDAQABo0IwQDAdBgNVHQ4EFgQUxJltWrexNjpD
-                        DIDZMZtLvgCu3o0wHwYDVR0jBBgwFoAUxJltWrexNjpDDIDZMZtLvgCu3o0wDQYJ
-                        KoZIhvcNAQEMBQADggEBALlg+GedzoWo77xIV25ah2AF0jm5/OT5D0a85Sf/aZl8
-                        iocehPLSvgsUxVhWN8wOiRkfNp/RM+9/9a4KY+03qZ7CTSFkQgs/iRa6n85zEyG7
-                        yP+sZuQ7clH82hCWI6VSP4sapkPKCm8kLnV0Uz0jjVWcXaNENPC3VXA6D6eFp7YX
-                        49m8GTeWit8sD/bm2i3V0jgeZvMUjJtHrhzemT3hPAY9L7qLBwZf+yvf0hOmvTdj
-                        nDUt+YsE7z5t1LvLLSoT0fQE7W/gPntVieIMTyxS2BnXMAOCv0vgJw6PNepNYOzq
-                        05ZgjAiJe0qgmG7xnXxbNdH1dqxPc/0xlxOqcAO+x0A=
-                        -----END CERTIFICATE-----
+#      ENV.PRIVATE_KEY.ephemeral.aws.com: '{ "keystore": "Software DB", "algorithm": "RSA", "keyPassword": "7layer" }'
+#      ENV.CERTIFICATE.ephemeral.aws.com: '{
+#                      "verifyHostname" : false,
+#                      "trustedForSsl" : true,
+#                      "trustedAsSamlAttestingEntity" : true,
+#                      "trustAnchor" : true,
+#                      "revocationCheckingEnabled" : true,
+#                      "trustedForSigningClientCerts" : true,
+#                      "trustedForSigningServerCerts" : true,
+#                      "trustedAsSamlIssuer" : true
+#                      }'
+#      ENV.CERTIFICATE_FILE.ephemeral.aws.com.pem: |-
+#                        -----BEGIN CERTIFICATE-----
+#                        MIIC/DCCAeSgAwIBAgIIYYoY9A0yh28wDQYJKoZIhvcNAQEMBQAwHDEaMBgGA1UE
+#                        AxMRZXBoZW1lcmFsLmF3cy5jb20wHhcNMTkwODI3MTQ1ODM5WhcNMjQwODI1MTQ1
+#                        ODM5WjAcMRowGAYDVQQDExFlcGhlbWVyYWwuYXdzLmNvbTCCASIwDQYJKoZIhvcN
+#                        AQEBBQADggEPADCCAQoCggEBAIJm7nWS6L9ep8L8Dd38jJMtaDebMJGojF9dGxnT
+#                        fCiCoSy7/zjJY7WX81+Vph4HmbdhBNGhXlFu3rwJjgAEG7WJ4wcDzuQFvzX7wdrb
+#                        fCcFFRpfdwoZkEpX0/p5lWGNHkLStmekvrztE+6Q/AbjUwfU1tAP4/0Pgh6ixR/Z
+#                        z9mpkysjRc/587WGK2RkcwIDPK+oj88XnEcC7JMlJl5kLOgNDskPzAdmV5BAWAiR
+#                        chJdzwnYmxHFEUGRnWkmmVVaYn97Gnb0IvOl6wx0RSmN5M0JwzNp5So0x3eZdZPE
+#                        AR7cQLmpK50BtFOmxQLfGlIMIvIftaOLU3O6yIx4XkIvIO0CAwEAAaNCMEAwHQYD
+#                        VR0OBBYEFBlIA44U5nPLyPGO0GyNnoCU1epEMB8GA1UdIwQYMBaAFBlIA44U5nPL
+#                        yPGO0GyNnoCU1epEMA0GCSqGSIb3DQEBDAUAA4IBAQBGsOZtyIkSOPq91aL6FPhT
+#                        p2yj3w1tjP4Xg2um0+GWEERgLgtizLaPxyEcUAKvcPhM8qYWapzPrORmr6WUg9kE
+#                        3fIKJLHL5QAQ0/THAGBAH+vi9y8WYHWLN96i2DLORdgU0rQLzmjO07qq5Ng9ty1p
+#                        sdxU9Yo4traxtnPQ68MIjFw8RBotGTEHzCpzjoczsgTEYZXq5TnNPFFl7tVMf540
+#                        mkpTkPPhTq1JAtX9evAbadnim00tksbJDAtjF1MMxAheSayV50a6B8A1xdP0jnnT
+#                        EwDUfI25x3kEmwW4VNHPTMzBT0qOEeKiS5dmXX1FcjOqreY2+ldr5iqSy1wvYC7P
+#
+#                        -----END CERTIFICATE-----
+#      ENV.CERTIFICATE.localhost: '{
+#                            "verifyHostname" : false,
+#                            "trustedForSsl" : true,
+#                            "trustedAsSamlAttestingEntity" : true,
+#                            "trustAnchor" : true,
+#                            "revocationCheckingEnabled" : true,
+#                            "trustedForSigningClientCerts" : true,
+#                            "trustedForSigningServerCerts" : true,
+#                            "trustedAsSamlIssuer" : true
+#                            }'
+#      ENV.CERTIFICATE_FILE.localhost.pem: |-
+#                        -----BEGIN CERTIFICATE-----
+#                        MIIC7DCCAdSgAwIBAgIIeHYshjhzQl8wDQYJKoZIhvcNAQEMBQAwFDESMBAGA1UE
+#                        AxMJbG9jYWxob3N0MB4XDTE5MDgyOTE0MDkxMVoXDTI5MDgyNjE0MDkxMVowFDES
+#                        MBAGA1UEAxMJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+#                        AQEA49Gu+a7nmwarOT/FLZKkGUK8Z9OR58M+LNZdJmMaDHTqkRrWWFyH+TC9Smpr
+#                        vd5ogkHikfkndcDd1HkTcLGT98J3lwvuuBZg8j678oGVzxqj38bqlkG8VKzofjPH
+#                        71UUJWIMxgJcI0+mdMlkeIXoFoc8ED38J7i7/7jviP2Pxr1lXDK7O4WS0uId8r/X
+#                        0222urzF8XaLLRcYibhnMrTaOYHbZjwlTXl/EamfSnomVzHjtMGNynjyE1L+qPiN
+#                        QC4/xYPLPjn1X8ObS2wzPQkVRDu/WbKzlgcfkHAa68IN93tCoX/z73cSKiisrfbW
+#                        sxKLA1Uaz60komNCL8Wgm7BQwwIDAQABo0IwQDAdBgNVHQ4EFgQUxJltWrexNjpD
+#                        DIDZMZtLvgCu3o0wHwYDVR0jBBgwFoAUxJltWrexNjpDDIDZMZtLvgCu3o0wDQYJ
+#                        KoZIhvcNAQEMBQADggEBALlg+GedzoWo77xIV25ah2AF0jm5/OT5D0a85Sf/aZl8
+#                        iocehPLSvgsUxVhWN8wOiRkfNp/RM+9/9a4KY+03qZ7CTSFkQgs/iRa6n85zEyG7
+#                        yP+sZuQ7clH82hCWI6VSP4sapkPKCm8kLnV0Uz0jjVWcXaNENPC3VXA6D6eFp7YX
+#                        49m8GTeWit8sD/bm2i3V0jgeZvMUjJtHrhzemT3hPAY9L7qLBwZf+yvf0hOmvTdj
+#                        nDUt+YsE7z5t1LvLLSoT0fQE7W/gPntVieIMTyxS2BnXMAOCv0vgJw6PNepNYOzq
+#                        05ZgjAiJe0qgmG7xnXxbNdH1dqxPc/0xlxOqcAO+x0A=
+#                        -----END CERTIFICATE-----
 secrets:
   license:
     file: ./docker/license.xml

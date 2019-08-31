@@ -79,7 +79,7 @@
                     </L7p:ResponseHeaderRules>
                     <L7p:ResponseMsgDest stringValue="MSKeyInfoResp"/>
                     <L7p:SamlAssertionVersion intValue="2"/>
-                    <L7p:UsesDefaultKeyStore booleanValue="false"/>
+                    <L7p:UsesNoKey booleanValue="true"/>
                 </L7p:HttpRoutingAssertion>
                 <L7p:EvaluateJsonPathExpressionV2>
                     <L7p:Expression stringValue="$.jwks_uri"/>
@@ -119,7 +119,7 @@
                     </L7p:ResponseHeaderRules>
                     <L7p:ResponseMsgDest stringValue="keyResp"/>
                     <L7p:SamlAssertionVersion intValue="2"/>
-                    <L7p:UsesDefaultKeyStore booleanValue="false"/>
+                    <L7p:UsesNoKey booleanValue="true"/>
                 </L7p:HttpRoutingAssertion>
                 <L7p:CacheStorage>
                     <L7p:CacheEntryKey stringValue="${cacheKey}"/>
@@ -133,7 +133,7 @@
             <wsp:All wsp:Usage="Required">
                 <L7p:DecodeJsonWebToken>
                     <L7p:FailUnverifiedSignature booleanValue="true"/>
-                    <L7p:KeyId stringValue="7layer"/>
+                    <L7p:KeyId stringValue="ssl"/>
                     <L7p:KeyType stringValue="JSON Web Key Set"/>
                     <L7p:PrivateKeySource stringValue="${keyResp.mainpart}"/>
                     <L7p:SourcePayload stringValue="${jwt}"/>

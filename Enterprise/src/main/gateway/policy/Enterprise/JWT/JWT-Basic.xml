@@ -33,8 +33,7 @@
                     <L7p:VariableToSet stringValue="jwt"/>
                 </L7p:SetVariable>
                 <L7p:EncodeJsonWebToken>
-                    <L7p:KeyAlias stringValue="ephemeral.aws.com"/>
-                    <L7p:KeyGoid goidValue="00000000000000000000000000000005"/>
+                    <L7p:KeyGoid goidValue="0000000000000000ffffffffffffffff"/>
                     <L7p:SignPayload booleanValue="true"/>
                     <L7p:SignatureAlgorithm stringValue="RS256"/>
                     <L7p:SignatureSourceType intValue="1"/>

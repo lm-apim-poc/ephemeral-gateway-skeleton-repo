@@ -1,4 +1,0 @@
-ephemeral.aws.com:
-  keystore: "Generic"
-  algorithm: "RSA"
-  keyPassword: "7layer"
