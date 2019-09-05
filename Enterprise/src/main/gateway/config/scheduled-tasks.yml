@@ -3,6 +3,6 @@ Consul-SyncTask:
   isOneNode: false
   jobType: "Recurring"
   jobStatus: "Scheduled"
-  cronExpression: "0 */5 * * * ?"
+  cronExpression: "*/15 * * * * ?"
   shouldExecuteOnCreate: true
   properties: {}

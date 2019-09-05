@@ -3,3 +3,8 @@ Consul-BackgroundSyncService:
   operations:
   - policy: "Enterprise/MasterTemplate/Consul-CatalogSync"
     operationName: "run"
+Metrics:
+  interfaceName: "com.l7tech.external.assertions.pbsmel.server.ServiceMetricsProcessor"
+  operations:
+  - policy: "Enterprise/MasterTemplate/Metrics"
+    operationName: "process"

@@ -21,7 +21,7 @@
         <wsp:OneOrMore wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
                 <L7p:Include>
-                    <L7p:PolicyGuid policyPath="Enterprise/MasterTemplate/JWT - VALIDATE"/>
+                    <L7p:PolicyGuid policyPath="Enterprise/MasterTemplate/JWT-Validate"/>
                 </L7p:Include>
             </wsp:All>
             <wsp:All wsp:Usage="Required">

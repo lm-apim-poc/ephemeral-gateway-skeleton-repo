@@ -24,10 +24,14 @@
         <L7p:CommentAssertion>
             <L7p:Comment stringValue="************************************************************"/>
         </L7p:CommentAssertion>
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[http://${gateway.consul.host}:${gateway.consul.port}/v1]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="consul.url"/>
+        </L7p:SetVariable>
         <L7p:HttpRoutingAssertion>
             <L7p:FailOnErrorStatus booleanValue="false"/>
             <L7p:HttpMethod httpMethod="PUT"/>
-            <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/catalog/deregister"/>
+            <L7p:ProtectedServiceUrl stringValue="${consul.url}/catalog/deregister"/>
             <L7p:ProxyPassword stringValueNull="null"/>
             <L7p:ProxyUsername stringValueNull="null"/>
             <L7p:RequestHeaderRules httpPassthroughRuleSet="included">

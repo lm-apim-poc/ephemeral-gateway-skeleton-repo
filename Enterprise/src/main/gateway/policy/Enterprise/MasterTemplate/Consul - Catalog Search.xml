@@ -22,6 +22,10 @@
             <L7p:Comment stringValue="************************************************************"/>
         </L7p:CommentAssertion>
         <L7p:SetVariable>
+            <L7p:Expression><![CDATA[http://${gateway.consul.host}:${gateway.consul.port}/v1]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="consul.url"/>
+        </L7p:SetVariable>
+        <L7p:SetVariable>
             <L7p:Expression><![CDATA[${endPointCalling}]]></L7p:Expression>
             <L7p:VariableToSet stringValue="proxyEP"/>
         </L7p:SetVariable>
@@ -61,7 +65,7 @@
                     </L7p:Predicates>
                 </L7p:ComparisonAssertion>
                 <L7p:HttpRoutingAssertion>
-                    <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/catalog/service${param.uri}"/>
+                    <L7p:ProtectedServiceUrl stringValue="${consul.url}/catalog/service${param.uri}"/>
                     <L7p:ProxyPassword stringValueNull="null"/>
                     <L7p:ProxyUsername stringValueNull="null"/>
                     <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
@@ -93,7 +97,7 @@
             <wsp:All wsp:Usage="Required">
                 <L7p:HttpRoutingAssertion>
                     <L7p:FailOnErrorStatus booleanValue="false"/>
-                    <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/catalog/services"/>
+                    <L7p:ProtectedServiceUrl stringValue="${consul.url}/catalog/services"/>
                     <L7p:ProxyPassword stringValueNull="null"/>
                     <L7p:ProxyUsername stringValueNull="null"/>
                     <L7p:RequestHeaderRules httpPassthroughRuleSet="included">

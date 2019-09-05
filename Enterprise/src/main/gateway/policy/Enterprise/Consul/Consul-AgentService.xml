@@ -1,8 +1,12 @@
 <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
     <wsp:All wsp:Usage="Required">
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[http://${gateway.consul.host}:${gateway.consul.port}/v1]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="consul.url"/>
+        </L7p:SetVariable>
         <L7p:HttpRoutingAssertion>
             <L7p:FailOnErrorStatus booleanValue="false"/>
-            <L7p:ProtectedServiceUrl stringValue="http://${gateway.consul.hostaddress}/agent/services"/>
+            <L7p:ProtectedServiceUrl stringValue="http://${consul.url}/agent/services"/>
             <L7p:ProxyPassword stringValueNull="null"/>
             <L7p:ProxyUsername stringValueNull="null"/>
             <L7p:RequestHeaderRules httpPassthroughRuleSet="included">

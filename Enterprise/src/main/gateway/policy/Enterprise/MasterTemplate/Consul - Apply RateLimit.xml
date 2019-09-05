@@ -21,11 +21,15 @@
         <wsp:OneOrMore wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
                 <L7p:SetVariable>
+                    <L7p:Expression><![CDATA[http://${gateway.consul.host}:${gateway.consul.port}/v1]]></L7p:Expression>
+                    <L7p:VariableToSet stringValue="consul.url"/>
+                </L7p:SetVariable>
+                <L7p:SetVariable>
                     <L7p:Expression><![CDATA[/${domain}/ratelimit]]></L7p:Expression>
                     <L7p:VariableToSet stringValue="param.uri"/>
                 </L7p:SetVariable>
                 <L7p:HttpRoutingAssertion>
-                    <L7p:ProtectedServiceUrl stringValue="${gateway.consul.hostaddress}/kv${param.uri}"/>
+                    <L7p:ProtectedServiceUrl stringValue="${consul.url}/kv${param.uri}"/>
                     <L7p:ProxyPassword stringValueNull="null"/>
                     <L7p:ProxyUsername stringValueNull="null"/>
                     <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
