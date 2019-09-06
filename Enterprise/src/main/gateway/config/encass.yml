@@ -67,15 +67,6 @@ CONSUL - GET Key:
     allowTracing: "true"
     description: "Retreive Value for a given Key from Consul Key/Value Stream"
     passMetricsToParent: "true"
-JWT - Validate:
-  policy: "Enterprise/MasterTemplate/JWT - VALIDATE"
-  arguments: []
-  results: []
-  properties:
-    paletteFolder: "internalAssertions"
-    allowTracing: "false"
-    description: "JWT Validation Policy for the given set of keys"
-    passMetricsToParent: "false"
 CONSUL - Catalog Search:
   policy: "Enterprise/MasterTemplate/Consul - Catalog Search"
   arguments:

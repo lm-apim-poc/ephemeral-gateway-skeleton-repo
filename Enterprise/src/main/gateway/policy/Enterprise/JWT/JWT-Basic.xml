@@ -24,6 +24,7 @@
                 <L7p:HttpBasic/>
                 <L7p:Authentication>
                     <L7p:IdentityProviderName stringValue="Internal Identity Provider"/>
+                    <L7p:Enabled booleanValue="false"/>
                 </L7p:Authentication>
                 <L7p:SetVariable>
                     <L7p:Expression><![CDATA[{

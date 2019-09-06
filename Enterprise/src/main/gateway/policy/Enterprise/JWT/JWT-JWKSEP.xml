@@ -11,8 +11,7 @@
                 <L7p:item key="included">
                     <L7p:KeyId stringValue="7layer"/>
                     <L7p:PublicKeyUse stringValue="Signature"/>
-                    <L7p:SourceKeyAlias stringValue="ssl"/>
-                    <L7p:SourceKeyGoid goidValue="00000000000000000000000000000002"/>
+                    <L7p:SourceKeyGoid goidValue="0000000000000000ffffffffffffffff"/>
                 </L7p:item>
             </L7p:Keys>
             <L7p:TargetVariable stringValue="jwk"/>
