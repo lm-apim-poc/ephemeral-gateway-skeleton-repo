@@ -1,19 +1,18 @@
-CONSUL - GET Key:
-  policy: "Enterprise/MasterTemplate/Consul - GET Key"
+CONSUL - Apply RateLimit:
+  policy: "Enterprise/MasterTemplate/Consul - Apply RateLimit"
   arguments:
-  - name: "endPointCalling"
+  - name: "domain"
     type: "string"
     requireExplicit: true
-  results:
-  - name: "output"
-    type: "message"
+  results: []
   properties:
-    paletteFolder: "internalAssertions"
+    paletteFolder: "accessControl"
     allowTracing: "true"
-    description: "Retreive Value for a given Key from Consul Key/Value Stream"
+    description: "Applying Rate Limit specific to given Domain using Consul Key/Value\
+      \ Stream."
     passMetricsToParent: "true"
-CONSUL - Dynamic Route with Key:
-  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route with Key"
+Consul - Dynamic Route with Service:
+  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route with Service"
   arguments:
   - name: "endPointCalling"
     type: "string"
@@ -21,9 +20,9 @@ CONSUL - Dynamic Route with Key:
   results: []
   properties:
     paletteFolder: "internalAssertions"
-    allowTracing: "true"
-    description: "Retrieves specifc key/value from Consul and does a dynamic Route"
-    passMetricsToParent: "true"
+    allowTracing: "false"
+    description: "Dynamic Route for Service in Catalog (consul)"
+    passMetricsToParent: "false"
 CONSUL - DeRegister Catalog Service:
   policy: "Enterprise/MasterTemplate/Consul - DeRegister Catalog"
   arguments: []
@@ -42,8 +41,8 @@ CONSUL - Catalog Register:
     allowTracing: "false"
     description: "For Registering Service with catalog"
     passMetricsToParent: "false"
-Consul - Dynamic Route with Service:
-  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route with Service"
+CONSUL - Dynamic Route with Key:
+  policy: "Enterprise/MasterTemplate/Consul - Dynamic Route with Key"
   arguments:
   - name: "endPointCalling"
     type: "string"
@@ -51,8 +50,31 @@ Consul - Dynamic Route with Service:
   results: []
   properties:
     paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Retrieves specifc key/value from Consul and does a dynamic Route"
+    passMetricsToParent: "true"
+CONSUL - GET Key:
+  policy: "Enterprise/MasterTemplate/Consul - GET Key"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results:
+  - name: "output"
+    type: "message"
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "true"
+    description: "Retreive Value for a given Key from Consul Key/Value Stream"
+    passMetricsToParent: "true"
+JWT - Validate:
+  policy: "Enterprise/MasterTemplate/JWT - VALIDATE"
+  arguments: []
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
     allowTracing: "false"
-    description: "Dynamic Route for Service in Catalog (consul)"
+    description: "JWT Validation Policy for the given set of keys"
     passMetricsToParent: "false"
 CONSUL - Catalog Search:
   policy: "Enterprise/MasterTemplate/Consul - Catalog Search"
@@ -68,8 +90,8 @@ CONSUL - Catalog Search:
       \ in the catalog\n b. with specific service given - brings the details for that\
       \ service."
     passMetricsToParent: "false"
-JWT - Validate:
-  policy: "Enterprise/MasterTemplate/JWT - VALIDATE"
+JWT-Validate:
+  policy: "Enterprise/MasterTemplate/JWT-Validate"
   arguments: []
   results: []
   properties:
@@ -77,19 +99,6 @@ JWT - Validate:
     allowTracing: "false"
     description: "JWT Validation Policy for the given set of keys"
     passMetricsToParent: "false"
-CONSUL - Apply RateLimit:
-  policy: "Enterprise/MasterTemplate/Consul - Apply RateLimit"
-  arguments:
-  - name: "domain"
-    type: "string"
-    requireExplicit: true
-  results: []
-  properties:
-    paletteFolder: "accessControl"
-    allowTracing: "true"
-    description: "Applying Rate Limit specific to given Domain using Consul Key/Value\
-      \ Stream."
-    passMetricsToParent: "true"
 CONSUL - PUT Key:
   policy: "Enterprise/MasterTemplate/Consul - PUT Key"
   arguments:
@@ -102,12 +111,3 @@ CONSUL - PUT Key:
     allowTracing: "true"
     description: "Adding/Updating the Key/Value Stream in Consul"
     passMetricsToParent: "true"
-JWT-Validate:
-  policy: "Enterprise/MasterTemplate/JWT-Validate"
-  arguments: []
-  results: []
-  properties:
-    paletteFolder: "internalAssertions"
-    allowTracing: "false"
-    description: "JWT Validation Policy for the given set of keys"
-    passMetricsToParent: "false"

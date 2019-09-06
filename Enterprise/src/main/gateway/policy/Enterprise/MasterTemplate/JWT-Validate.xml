@@ -134,7 +134,7 @@
                 </L7p:CacheStorage>
             </wsp:All>
         </wsp:OneOrMore>
-        <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+        <wsp:OneOrMore wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
                 <L7p:DecodeJsonWebToken>
                     <L7p:FailUnverifiedSignature booleanValue="true"/>
