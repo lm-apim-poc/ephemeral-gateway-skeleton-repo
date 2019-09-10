@@ -158,3 +158,13 @@ Enterprise/JWT/JWT-Validate:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+Enterprise/Consul/Consul-Delete:
+  url: "/delete/key*"
+  policy: "Enterprise/Consul/Consul-Delete"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false

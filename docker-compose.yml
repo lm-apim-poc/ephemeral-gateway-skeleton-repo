@@ -5,7 +5,7 @@
 version: '3.4'
 services:
   gateway-dev:
-    hostname: localhost
+    hostname: gateway.security.broadcom.com
     image: caapim/gateway:9.4.00
     ports:
     - "8080:8080"

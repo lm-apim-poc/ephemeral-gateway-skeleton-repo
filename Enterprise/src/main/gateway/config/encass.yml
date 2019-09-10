@@ -102,3 +102,15 @@ CONSUL - PUT Key:
     allowTracing: "true"
     description: "Adding/Updating the Key/Value Stream in Consul"
     passMetricsToParent: "true"
+Consul - Delete Key:
+  policy: "Enterprise/MasterTemplate/Consul - Delete Key"
+  arguments:
+  - name: "endPointCalling"
+    type: "string"
+    requireExplicit: true
+  results: []
+  properties:
+    paletteFolder: "internalAssertions"
+    allowTracing: "false"
+    description: "For delete Consul Key"
+    passMetricsToParent: "false"

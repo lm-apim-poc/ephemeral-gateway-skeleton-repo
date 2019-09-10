@@ -1,13 +1,10 @@
 <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
     <wsp:All wsp:Usage="Required">
         <L7p:CommentAssertion>
-            <L7p:Comment stringValue="Policy Fragment: Consul - Delete Key"/>
-        </L7p:CommentAssertion>
-        <L7p:CommentAssertion>
             <L7p:Comment stringValue="************************************************************"/>
         </L7p:CommentAssertion>
         <L7p:CommentAssertion>
-            <L7p:Comment stringValue="API :- Consul Delete Key"/>
+            <L7p:Comment stringValue="API :- Get OTK Client"/>
         </L7p:CommentAssertion>
         <L7p:CommentAssertion>
             <L7p:Comment stringValue="API Group :- API Security"/>
@@ -23,7 +20,14 @@
         </L7p:CommentAssertion>
         <wsp:OneOrMore wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
-                <L7p:Encapsulated encassName="CONSUL - Catalog Register"/>
+                <L7p:Encapsulated encassName="Consul - Delete Key">
+                    <L7p:Parameters mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="endPointCalling"/>
+                            <L7p:value stringValue="delete/key/"/>
+                        </L7p:entry>
+                    </L7p:Parameters>
+                </L7p:Encapsulated>
             </wsp:All>
             <wsp:All wsp:Usage="Required">
                 <L7p:CustomizeErrorResponse>
@@ -41,6 +45,24 @@
                 </L7p:CustomizeErrorResponse>
                 <L7p:RaiseError/>
             </wsp:All>
+            <L7p:assertionComment>
+                <L7p:Properties mapValue="included">
+                    <L7p:entry>
+                        <L7p:key stringValue="LEFT.COMMENT"/>
+                        <L7p:value stringValue="GET KEY/VALUE"/>
+                    </L7p:entry>
+                    <L7p:entry>
+                        <L7p:key stringValue="RIGHT.COMMENT"/>
+                        <L7p:value stringValue="//Retrieve Value for the given key from Consul"/>
+                    </L7p:entry>
+                </L7p:Properties>
+            </L7p:assertionComment>
         </wsp:OneOrMore>
+        <L7p:HardcodedResponse>
+            <L7p:ResponseBody><![CDATA[${output.mainpart}
+
+]]></L7p:ResponseBody>
+            <L7p:ResponseContentType stringValue="application/json; charset=UTF-8"/>
+        </L7p:HardcodedResponse>
     </wsp:All>
 </wsp:Policy>
