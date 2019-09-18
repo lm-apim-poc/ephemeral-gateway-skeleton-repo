@@ -5,7 +5,7 @@
 version: '3.4'
 services:
   gateway-dev:
-    hostname: gateway.security.broadcom.com
+    hostname: k8sgw.lmpoc.apim.ca
     image: caapim/gateway:9.4.00
     ports:
     - "8080:8080"
@@ -26,7 +26,7 @@ services:
       SSG_ADMIN_USERNAME: "admin"
       SSG_ADMIN_PASSWORD: "7layer"
       ENV.PRIVATE_KEY.ssl: '{ "keystore": "Generic", "algorithm": "RSA", "keyPassword": "7layer" }'
-      ENV.CERTIFICATE.security.broadcom.com: '{
+      ENV.CERTIFICATE.k8sgw.apim.ca.client: '{
                       "verifyHostname" : false,
                       "trustedForSsl" : true,
                       "trustedAsSamlAttestingEntity" : true,
@@ -36,30 +36,30 @@ services:
                       "trustedForSigningServerCerts" : true,
                       "trustedAsSamlIssuer" : true
                       }'
-      ENV.CERTIFICATE_FILE.security.broadcom.com.pem: |-
+      ENV.CERTIFICATE_FILE.k8sgw.apim.ca.client.pem: |-
                         Bag Attributes
                             friendlyName: ssl
-                            localKeyID: A2 A6 89 8D 36 E5 70 5A 53 59 BE 03 56 75 49 82 23 3F 31 62
-                        subject=/CN=*.security.broadcom.com
-                        issuer=/CN=*.security.broadcom.com
+                            localKeyID: EB BD C9 CA 10 5D F5 E4 21 5E 98 86 5E EE AF 57 8E AA 7F 4C 
+                        subject=/CN=k8sgw.lmpoc.apim.ca
+                        issuer=/CN=k8sgw.lmpoc.apim.ca
                         -----BEGIN CERTIFICATE-----
-                        MIIDCTCCAfGgAwIBAgIJAKSJPvYVOTVCMA0GCSqGSIb3DQEBDAUAMCIxIDAeBgNV
-                        BAMMFyouc2VjdXJpdHkuYnJvYWRjb20uY29tMB4XDTE5MDkwNjIwMTIzNloXDTI0
-                        MDkwNDIwMTIzNlowIjEgMB4GA1UEAwwXKi5zZWN1cml0eS5icm9hZGNvbS5jb20w
-                        ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQClXk9KrC/l5IaSWS+lYVRT
-                        tC82wYdlXZcIHqWHeKouQbnumFAQqJvx2Vd80YIrtOQSYvPfijA80B0f0bXc2/YQ
-                        JTlNdm6iCEzQJUNEjj2dt9cDIoJ/PCOHI5BuEyS0b4zBnsZBxmLC8yTjyL+AoB8i
-                        cnmSoF/fH63FTFMe/7nGDGibmYnvDZ3TfxmR+5mfO80gonEtopcp/Gr7fWopl63e
-                        Rs4HFL2cIdKXz7WLExoAkmVdsH68FMuMpifhFBJj48rIp/7vueG7EbXnmoNPd53Q
-                        dvEfSmkAxWzaUH8DSABRE3WKzaXlSreIwWxpSy196D9GWA1G2AGtiUDpIIvL3Qan
-                        AgMBAAGjQjBAMB0GA1UdDgQWBBQei20AVMPWlqs5CUMM71kI3PlzXDAfBgNVHSME
-                        GDAWgBQei20AVMPWlqs5CUMM71kI3PlzXDANBgkqhkiG9w0BAQwFAAOCAQEAOsCd
-                        nulueLTfN6Xhy3Oac0QQSmR2uA2Q4GkFqaxNJiB/aif91MzjTiEEOymLCJA4B4dx
-                        fMHjw8kcKQnUhJgQ1qht4U4awm+avImB7wbiq4xZg4opnR2VyDZgb9EAnl2uqYcl
-                        DhdzeGpvQO/1x6ODu81SOO9Z+2y0D2+m7xa6xRXbLChKnhfxYq007oh/68rYxuJ4
-                        eUjGHqfCzeX868aG+7XAjRLlmYRppGEAxWoAwgm3Y5haVaN/AcJ9INiwufj+VPv7
-                        C9kZkjDmrALF4KtAIXSRVTXHXhqdw4HjVl25/5iJAq3+UPbHMjwUjKwVnX/mp9mr
-                        CLerTH2x9q6UIMDvBg==
+                        MIIDADCCAeigAwIBAgIIAwRwML4xxgIwDQYJKoZIhvcNAQEMBQAwHjEcMBoGA1UE
+                        AxMTazhzZ3cubG1wb2MuYXBpbS5jYTAeFw0xOTA5MTcyMDI3MzVaFw0yNDA5MTUy
+                        MDI3MzVaMB4xHDAaBgNVBAMTE2s4c2d3LmxtcG9jLmFwaW0uY2EwggEiMA0GCSqG
+                        SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCr35cGO64nptONVHRf276cDkF0+yo52PuT
+                        5409/HGKHB82hxjpvR9QP2iUn85gVqJ9EFD0a2e7JvNKovIBGNKY1lpTmP5q/kNq
+                        I1LeGM65zOe88JL19frY+9AoWtJD4Znr4OBL5Hb64IG7hO78UxFrzRD/e3mHOYEv
+                        dShCjTcd85MpNzbty7y8IcODEsXe2Nwm5ELsFePIWcC8hRgVlHqNwLErNtIryIca
+                        KxiTKryITA313COvbvA5cUiv/dv8R0WnI1hGGS7bSULQu0qGn4TAYsKNfkyZ9NOg
+                        1hmG/be75OZYcBNd1ny08/XsaLHhMl2U2FuWegu753r7oHCCONOnAgMBAAGjQjBA
+                        MB0GA1UdDgQWBBTu1/tKRTUvN6fhO0IgMKOCIFq56jAfBgNVHSMEGDAWgBTu1/tK
+                        RTUvN6fhO0IgMKOCIFq56jANBgkqhkiG9w0BAQwFAAOCAQEAOsC+o8+U0P6xm9YT
+                        xQEBHK0Uo8qTsfPkXO1egiiNEc136MYB4BLFqe0UBCCQtgBMqToS1zUZQ1HxA5N9
+                        JpDSx7MgrbFez1haVbxf9JYj78i4BY4isUiDDzzeCyP5ie3uPasD+uKwz/V12i0v
+                        g2VZVUi4sYjkkd6ZOtNsSIxUlt/hlUOwK95CcWzp0VTSvcipoeH4UnbPQcxJqAlo
+                        d0YffFxPUM0duKRyXlCNbwnWHwA8leLd0znaXZ9CWHMs29r0OZuDVwxaBpzqiSGO
+                        y1pR28SMcHcw+z4E0mpPWBjL0fgB7w4wnyEup8knkajZ1qedWjiuJWIgLTqAthbZ
+                        PUkC+A==
                         -----END CERTIFICATE-----
 
 secrets:
