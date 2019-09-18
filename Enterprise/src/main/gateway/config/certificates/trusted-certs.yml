@@ -1,9 +1,0 @@
-k8sgw.apim.ca.client.pem:
-  verifyHostname: false
-  trustedForSsl: true
-  trustedAsSamlAttestingEntity: true
-  trustAnchor: true
-  revocationCheckingEnabled: true
-  trustedForSigningClientCerts: true
-  trustedForSigningServerCerts: true
-  trustedAsSamlIssuer: true

@@ -14,3 +14,9 @@ build/
 # Ignore the license out so that it is not accidentally committed.
 /license.xml
 /docker/license.xml
+
+# Ignore the Private Keys and Certificates
+/Enterprise/src/main/gateway/config/privateKeys/*
+/Enterprise/src/main/gateway/config/certificates/*
+/Enterprise/src/main/gateway/config/trusted-certs.yml
+/Enterprise/src/main/gateway/config/global-env.properties
