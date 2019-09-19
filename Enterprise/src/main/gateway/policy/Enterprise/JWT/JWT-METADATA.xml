@@ -15,7 +15,7 @@
       "client_secret_post",
       "private_key_jwt"
    ],
-   "jwks_uri":"http:\/\/${gateway.jwt.host}:${gateway.jwt.port}\/discovery\/v2.0\/keys"
+   "jwks_uri":"https:\/\/${gateway.jwt.host}:${gateway.jwt.port}\/discovery\/v2.0\/keys"
 }]]></L7p:ResponseBody>
             <L7p:ResponseContentType stringValue="application/json; charset=UTF-8"/>
         </L7p:HardcodedResponse>

@@ -31,7 +31,7 @@
                 <L7p:VariableToSet stringValue="MSKeyInfoResp"/>
             </L7p:SetVariable>
             <L7p:SetVariable>
-                <L7p:Expression><![CDATA[http://${jwt.url}/.well-known/v2.0/openid-configuration]]></L7p:Expression>
+                <L7p:Expression><![CDATA[https://${jwt.url}/.well-known/v2.0/openid-configuration]]></L7p:Expression>
                 <L7p:VariableToSet stringValue="MSKeyInfoURL"/>
             </L7p:SetVariable>
             <L7p:SetVariable>
