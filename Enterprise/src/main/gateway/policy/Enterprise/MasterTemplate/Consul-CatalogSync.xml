@@ -314,6 +314,10 @@ Addresses from Cache after storing : ${serviceName.available.mainpart}]]></L7p:D
                 <L7p:Level intValue="4"/>
             </L7p:LevelInfo>
         </L7p:FaultLevel>
+        <L7p:AuditDetailAssertion>
+            <L7p:Detail stringValue="Consul Sync Job Completed. Consul URL was: ${consul.url}"/>
+            <L7p:Level stringValue="WARNING"/>
+        </L7p:AuditDetailAssertion>
         <L7p:HardcodedResponse>
             <L7p:ResponseBody><![CDATA[Ok]]></L7p:ResponseBody>
             <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
