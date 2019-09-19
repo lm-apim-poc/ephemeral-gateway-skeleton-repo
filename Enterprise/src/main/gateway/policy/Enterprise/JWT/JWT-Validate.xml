@@ -23,6 +23,12 @@
                 <L7p:Include>
                     <L7p:PolicyGuid policyPath="Enterprise/MasterTemplate/JWT-Validate"/>
                 </L7p:Include>
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValueReference="inline"><![CDATA[MSKeyInfoURL: ${MSKeyInfoURL}
+jwksURL.result: ${jwksURL.result}
+JWT Port: ${gateway.jwt.port}]]></L7p:Detail>
+                    <L7p:Level stringValue="WARNING"/>
+                </L7p:AuditDetailAssertion>
             </wsp:All>
             <wsp:All wsp:Usage="Required">
                 <L7p:CustomizeErrorResponse>
