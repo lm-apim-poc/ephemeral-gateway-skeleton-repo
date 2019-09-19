@@ -53,6 +53,10 @@
                         </L7p:item>
                     </L7p:Predicates>
                 </L7p:ComparisonAssertion>
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValue="Look Here for the Port: ${request.url.port}${param.uri}${request.url.query}"/>
+                    <L7p:Level stringValue="WARNING"/>
+                </L7p:AuditDetailAssertion>
                 <wsp:OneOrMore wsp:Usage="Required">
                     <wsp:All wsp:Usage="Required">
                         <L7p:ComparisonAssertion>
@@ -72,6 +76,10 @@
                             <L7p:OutputVariable stringValue="uriSplit"/>
                             <L7p:SplitPattern stringValue="/"/>
                         </L7p:Split>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="aaaaaaaaaaaaaaa"/>
+                            <L7p:Level stringValue="WARNING"/>
+                        </L7p:AuditDetailAssertion>
                         <L7p:CacheLookup>
                             <L7p:CacheEntryKey stringValue="${uriSplit[0]}"/>
                             <L7p:CacheId stringValue="consul-service-reg-data"/>
@@ -93,15 +101,15 @@
                             <L7p:Expression/>
                             <L7p:VariableToSet stringValue="hosturl"/>
                         </L7p:SetVariable>
-                        <L7p:AuditDetailAssertion>
-                            <L7p:Detail stringValue="Look Here for the Port: ${request.url.port}${param.uri}${request.url.query}"/>
-                            <L7p:Level stringValue="WARNING"/>
-                        </L7p:AuditDetailAssertion>
                         <L7p:ForEachLoop L7p:Usage="Required" loopVariable="hostDetails" variablePrefix="url">
                             <L7p:SetVariable>
                                 <L7p:Expression><![CDATA[${hosturl}${request.url.protocol}://${url.current}:${request.url.port}${param.uri}${request.url.query},]]></L7p:Expression>
                                 <L7p:VariableToSet stringValue="hosturl"/>
                             </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="bbbbbbbbbbbbbbb"/>
+                                <L7p:Level stringValue="WARNING"/>
+                            </L7p:AuditDetailAssertion>
                         </L7p:ForEachLoop>
                         <L7p:Split>
                             <L7p:IgnoreEmptyValues booleanValue="true"/>
@@ -118,6 +126,10 @@
                             <L7p:StrategyName stringValue="robin"/>
                         </L7p:CreateRoutingStrategy>
                         <L7p:ForEachLoop L7p:Usage="Required" loopVariable="strategy.routeList" variablePrefix="route">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="ccccccccccccccc"/>
+                                <L7p:Level stringValue="WARNING"/>
+                            </L7p:AuditDetailAssertion>
                             <L7p:SetVariable>
                                 <L7p:Expression><![CDATA[0]]></L7p:Expression>
                                 <L7p:DataType variableDataType="int"/>
