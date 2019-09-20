@@ -246,7 +246,6 @@
             <wsp:All wsp:Usage="Required">
                 <L7p:Encapsulated encassName="JWT-Validate"/>
                 <L7p:Encapsulated encassName="CONSUL - Apply RateLimit">
-                    <L7p:Enabled booleanValue="false"/>
                     <L7p:Parameters mapValue="included">
                         <L7p:entry>
                             <L7p:key stringValue="domain"/>
