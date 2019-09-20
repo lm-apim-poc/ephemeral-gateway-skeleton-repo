@@ -179,7 +179,7 @@ Enterprise/AWS-SK1/AWS-Lambda:
   properties: {}
   wssProcessingEnabled: false
 Enterprise/Proxies/test:
-  url: "/test/test*"
+  url: "/example/game*"
   policy: "Enterprise/Proxies/test"
   httpMethods:
   - "DELETE"
