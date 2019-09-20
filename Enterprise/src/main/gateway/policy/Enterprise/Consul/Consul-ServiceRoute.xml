@@ -18,6 +18,9 @@
         <L7p:CommentAssertion>
             <L7p:Comment stringValue="************************************************************"/>
         </L7p:CommentAssertion>
+        <L7p:Include>
+            <L7p:PolicyGuid policyPath="Enterprise/liMuTemplates/circuitBreaker"/>
+        </L7p:Include>
         <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
                 <L7p:SetVariable>
@@ -239,7 +242,7 @@
                 </L7p:Properties>
             </L7p:assertionComment>
         </wsp:OneOrMore>
-        <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+        <wsp:OneOrMore wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
                 <L7p:Encapsulated encassName="JWT-Validate"/>
                 <L7p:Encapsulated encassName="CONSUL - Apply RateLimit">

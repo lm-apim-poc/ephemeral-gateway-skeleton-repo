@@ -1,0 +1,39 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:CommentAssertion>
+            <L7p:Comment stringValue="Policy Fragment: circuitBreaker"/>
+        </L7p:CommentAssertion>
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[${request.http.parameter.breaker}]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="breaker"/>
+        </L7p:SetVariable>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <L7p:CircuitBreaker L7p:Usage="Required" latencyCircuitCustomTrackerIdEnabled="false" latencyCircuitEnabled="false" latencyCircuitEventTrackerID="" latencyCircuitMaxFailures="5" latencyCircuitMaxLatency="500" latencyCircuitRecoveryPeriod="10000" latencyCircuitSamplingWindow="5000" policyFailureCircuitCustomTrackerIdEnabled="false" policyFailureCircuitEnabled="true" policyFailureCircuitEventTrackerID="" policyFailureCircuitMaxFailures="1" policyFailureCircuitRecoveryPeriod="10000" policyFailureCircuitSamplingWindow="500">
+                <L7p:ComparisonAssertion>
+                    <L7p:CaseSensitive booleanValue="false"/>
+                    <L7p:Expression1 stringValue="${breaker}"/>
+                    <L7p:Expression2 stringValue="false"/>
+                    <L7p:Operator operator="EMPTY"/>
+                    <L7p:Predicates predicates="included">
+                        <L7p:item binary="included">
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Operator operator="EMPTY"/>
+                            <L7p:RightValue stringValue="false"/>
+                        </L7p:item>
+                    </L7p:Predicates>
+                </L7p:ComparisonAssertion>
+                <L7p:TrueAssertion/>
+                <L7p:HardcodedResponse>
+                    <L7p:ResponseBody><![CDATA[Breaker Hasn't Been Broken!]]></L7p:ResponseBody>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+                </L7p:HardcodedResponse>
+            </L7p:CircuitBreaker>
+            <L7p:HardcodedResponse>
+                <L7p:ResponseBody><![CDATA[Breaker Has Been Broken!]]></L7p:ResponseBody>
+                <L7p:EarlyResponse booleanValue="true"/>
+                <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+            </L7p:HardcodedResponse>
+        </wsp:OneOrMore>
+    </wsp:All>
+</wsp:Policy>

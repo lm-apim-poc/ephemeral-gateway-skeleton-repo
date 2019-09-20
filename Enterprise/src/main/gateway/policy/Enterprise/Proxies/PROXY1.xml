@@ -5,7 +5,14 @@
 
 Query: ${request.url.query}
 
-Header: ${request.http.allheadervalues}]]></L7p:ResponseBody>
+Header: ${request.http.allheadervalues}
+
+{
+     "Response": "API call Success",
+     "callingURL":"${request.url}",
+     "dateOfCall":"${gateway.time.America/New_York}",
+     "requestID":"${requestId}"
+}]]></L7p:ResponseBody>
             <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
         </L7p:HardcodedResponse>
     </wsp:All>

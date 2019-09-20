@@ -168,3 +168,13 @@ Enterprise/Consul/Consul-Delete:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+Enterprise/AWS-SK1/AWS-Lambda:
+  url: "/lambda/getresponse"
+  policy: "Enterprise/AWS-SK1/AWS-Lambda"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
