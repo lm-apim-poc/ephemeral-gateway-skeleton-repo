@@ -3,5 +3,15 @@
         <L7p:CommentAssertion>
             <L7p:Comment stringValue="Policy Fragment: auditRecords"/>
         </L7p:CommentAssertion>
+        <L7p:AuditDetailAssertion>
+            <L7p:Detail stringValueReference="inline"><![CDATA[Request: ---------- ${request.mainpart} ----------
+
+Response: ---------- ${response.mainpart} ----------
+
+Gateway IP:  ---------- ${ssgnode.ip} ----------
+
+Time of Audit: ---------- ${gateway.time.America/New_York} ----------]]></L7p:Detail>
+            <L7p:Level stringValue="WARNING"/>
+        </L7p:AuditDetailAssertion>
     </wsp:All>
 </wsp:Policy>

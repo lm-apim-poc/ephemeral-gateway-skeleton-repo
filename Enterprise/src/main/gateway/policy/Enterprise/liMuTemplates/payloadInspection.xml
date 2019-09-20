@@ -3,5 +3,29 @@
         <L7p:CommentAssertion>
             <L7p:Comment stringValue="Policy Fragment: payloadInspection"/>
         </L7p:CommentAssertion>
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[${request.http.header.gdpr}]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="gdpr"/>
+        </L7p:SetVariable>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <L7p:ComparisonAssertion>
+                <L7p:CaseSensitive booleanValue="false"/>
+                <L7p:Expression1 stringValue="${gdpr}"/>
+                <L7p:Expression2 stringValue="false"/>
+                <L7p:Operator operator="EMPTY"/>
+                <L7p:Predicates predicates="included">
+                    <L7p:item binary="included">
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Operator operator="EMPTY"/>
+                        <L7p:RightValue stringValue="false"/>
+                    </L7p:item>
+                </L7p:Predicates>
+            </L7p:ComparisonAssertion>
+            <L7p:HardcodedResponse>
+                <L7p:ResponseBody><![CDATA[GDPR Payload is present!]]></L7p:ResponseBody>
+                <L7p:EarlyResponse booleanValue="true"/>
+                <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+            </L7p:HardcodedResponse>
+        </wsp:OneOrMore>
     </wsp:All>
 </wsp:Policy>

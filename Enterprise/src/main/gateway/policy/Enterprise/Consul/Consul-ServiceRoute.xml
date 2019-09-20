@@ -19,6 +19,9 @@
             <L7p:Comment stringValue="************************************************************"/>
         </L7p:CommentAssertion>
         <L7p:Include>
+            <L7p:PolicyGuid policyPath="Enterprise/liMuTemplates/payloadInspection"/>
+        </L7p:Include>
+        <L7p:Include>
             <L7p:PolicyGuid policyPath="Enterprise/liMuTemplates/circuitBreaker"/>
         </L7p:Include>
         <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
@@ -559,5 +562,8 @@ ${hosturl}]]></L7p:Detail>
                 </L7p:Properties>
             </L7p:assertionComment>
         </wsp:OneOrMore>
+        <L7p:Include>
+            <L7p:PolicyGuid policyPath="Enterprise/liMuTemplates/auditRecords"/>
+        </L7p:Include>
     </wsp:All>
 </wsp:Policy>
