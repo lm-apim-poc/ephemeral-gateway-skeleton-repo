@@ -112,9 +112,9 @@
         </L7p:AddHeader>
         <L7p:JavaScript>
             <L7p:ExecutionTimeout stringValue=""/>
-            <L7p:Name stringValue="yeah"/>
+            <L7p:Name stringValue="ModifyURL"/>
             <L7p:Script stringValueReference="inline"><![CDATA[var url = context.getVariable("request.url.path");
-var newURL = (url.split("/").slice(3).join("/"));
+var newURL = (url.split("/").slice(4).join("/"));
 
 context.setVariable("newURL", newURL);]]></L7p:Script>
         </L7p:JavaScript>
