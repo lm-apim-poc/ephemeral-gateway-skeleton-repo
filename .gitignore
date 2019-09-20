@@ -10,7 +10,7 @@ build/
 /out/
 .DS_Store
 .java-version
-
+docker-compose.yml
 # Ignore the license out so that it is not accidentally committed.
 /license.xml
 /docker/license.xml

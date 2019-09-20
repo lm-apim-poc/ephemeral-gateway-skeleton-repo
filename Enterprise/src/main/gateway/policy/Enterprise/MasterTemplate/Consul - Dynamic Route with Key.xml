@@ -155,6 +155,13 @@
                     <L7p:Target target="OTHER"/>
                     <L7p:VariablePrefix stringValue="protocol"/>
                 </L7p:EvaluateJsonPathExpressionV2>
+                <L7p:EvaluateJsonPathExpressionV2>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:Expression stringValue="$.reverseProxy"/>
+                    <L7p:OtherTargetMessageVariable stringValue="output"/>
+                    <L7p:Target target="OTHER"/>
+                    <L7p:VariablePrefix stringValue="reverseProxy"/>
+                </L7p:EvaluateJsonPathExpressionV2>
                 <wsp:All wsp:Usage="Required">
                     <L7p:SetVariable>
                         <L7p:Expression/>

@@ -22,7 +22,7 @@ subprojects {
     if (!project.name.equals('deployment')) {
         apply plugin: 'com.ca.apim.gateway.gateway-export-plugin'
         GatewayConnection {
-            url = 'https://localhost:8443/restman'
+            url = 'https://localhost:8444/restman'
             userName = 'admin'
             userPass = '7layer'
         }

@@ -8,9 +8,9 @@ services:
     hostname: k8sgw.lmpoc.apim.ca
     image: caapim/gateway:9.4.00
     ports:
-    - "8080:8080"
-    - "8443:8443"
-    - "8000:8000"
+    - "8081:8080"
+    - "8444:8443"
+    - "8001:8000"
     volumes:
     - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
     - ./deployment/build/gateway/deployment-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7

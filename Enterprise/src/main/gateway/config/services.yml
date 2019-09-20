@@ -178,3 +178,13 @@ Enterprise/AWS-SK1/AWS-Lambda:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+Enterprise/Proxies/test:
+  url: "/test/test*"
+  policy: "Enterprise/Proxies/test"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
