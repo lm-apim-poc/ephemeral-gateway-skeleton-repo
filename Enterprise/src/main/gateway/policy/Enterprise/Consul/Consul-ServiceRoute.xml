@@ -239,7 +239,7 @@
                 </L7p:Properties>
             </L7p:assertionComment>
         </wsp:OneOrMore>
-        <wsp:OneOrMore wsp:Usage="Required">
+        <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
             <wsp:All wsp:Usage="Required">
                 <L7p:Encapsulated encassName="JWT-Validate"/>
                 <L7p:Encapsulated encassName="CONSUL - Apply RateLimit">
@@ -382,7 +382,7 @@
                                 </L7p:SetVariable>
                                 <L7p:ForEachLoop L7p:Usage="Required" loopVariable="hostDetails" variablePrefix="url">
                                     <L7p:SetVariable>
-                                        <L7p:Expression><![CDATA[${hosturl}${request.url.protocol}://${url.current}:8080${param.uri}${request.url.query},]]></L7p:Expression>
+                                        <L7p:Expression><![CDATA[${hosturl}${request.url.protocol}://${url.current}:${request.url.port}${param.uri}${request.url.query},]]></L7p:Expression>
                                         <L7p:VariableToSet stringValue="hosturl"/>
                                     </L7p:SetVariable>
                                     <L7p:AuditDetailAssertion>
