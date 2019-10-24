@@ -198,3 +198,13 @@ Enterprise/NewService01:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+Enterprise/Desjardins:
+  url: "/desjardins"
+  policy: "Enterprise/Desjardins"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
