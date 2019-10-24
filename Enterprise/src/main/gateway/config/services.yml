@@ -188,3 +188,13 @@ Enterprise/Proxies/test:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+Enterprise/NewService01:
+  url: "/newservice01"
+  policy: "Enterprise/NewService01"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
